@@ -1,4 +1,4 @@
-# Ember Click Outside
+# Ember Click Outside [![Build Status](https://travis-ci.org/zeppelin/ember-click-outside.svg)](https://travis-ci.org/zeppelin/ember-click-outside)
 
 A component and mixin for detecting clicks happened outside the element.
 
