@@ -12,6 +12,15 @@ A component and mixin for detecting clicks happened outside the element.
 {{/click-outside}}
 ```
 
+If you wish to exclude certain elements from counting as outside clicks, use
+the `except-selector` attribute:
+
+```
+{{#click-outside action=(action "someAction") except-selector=".some-selector"}}
+  Your HTML...
+{{/click-outside}}
+```
+
 **As a mixin**
 
 In fact, this is the actual implementation of the above component...
