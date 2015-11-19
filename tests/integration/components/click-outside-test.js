@@ -17,7 +17,7 @@ test('smoke test', function(assert) {
   this.render(hbs`
     <div class="outside">Somewhere, over the rainbow...</div>
 
-    {{#click-outside action="didClickOutside"}}
+    {{#click-outside action=(action "didClickOutside")}}
       <div class="inside">We're in</div>
     {{/click-outside}}
   `);
