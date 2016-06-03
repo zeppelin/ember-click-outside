@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ClickOutside from '../mixins/click-outside';
 import layout from '../templates/components/click-outside';
 import $ from 'jquery';
-const { Component, on } = Ember;
+const { Component, on, run } = Ember;
 const { next } = Ember.run;
 
 export default Component.extend(ClickOutside, {
@@ -18,10 +18,11 @@ export default Component.extend(ClickOutside, {
   },
 
   _attachClickOutsideHandler: on('didInsertElement', function() {
-    next(this, this.addClickOutsideListener);
+    this._cancelOutsideListenerSetup = next(this, this.addClickOutsideListener);
   }),
 
   _removeClickOutsideHandler: on('willDestroyElement', function() {
+    run.cancel(this._cancelOutsideListerSetup);
     this.removeClickOutsideListener();
   })
 });
