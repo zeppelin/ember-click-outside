@@ -1,7 +1,7 @@
 {
   "name": "ember-click-outside",
-  "version": "0.1.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.1.1",
+  "description": "A component and mixin for detecting clicks happened outside the element.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -44,7 +44,7 @@
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.6",
-    "ember-cli-htmlbars": "^1.0.3"
+    "ember-cli-htmlbars": "^1.1.0"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
