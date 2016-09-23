@@ -1,15 +1,15 @@
-import Ember from 'ember';
 import ClickOutside from '../mixins/click-outside';
 import layout from '../templates/components/click-outside';
+import Component from 'ember-component';
+import on from 'ember-evented/on';
+import { next, cancel } from 'ember-runloop';
 import $ from 'jquery';
-const { Component, on } = Ember;
-const { next } = Ember.run;
 
 export default Component.extend(ClickOutside, {
   layout,
 
   clickOutside(e) {
-    const exceptSelector = this.attrs['except-selector'];
+    const exceptSelector = this.get('except-selector');
     if (exceptSelector && $(e.target).closest(exceptSelector).length > 0) {
       return;
     }
@@ -18,10 +18,11 @@ export default Component.extend(ClickOutside, {
   },
 
   _attachClickOutsideHandler: on('didInsertElement', function() {
-    next(this, this.addClickOutsideListener);
+    this._cancelOutsideListenerSetup = next(this, this.addClickOutsideListener);
   }),
 
   _removeClickOutsideHandler: on('willDestroyElement', function() {
+    cancel(this._cancelOutsideListerSetup);
     this.removeClickOutsideListener();
   })
 });
