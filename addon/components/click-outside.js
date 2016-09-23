@@ -9,7 +9,7 @@ export default Component.extend(ClickOutside, {
   layout,
 
   clickOutside(e) {
-    const exceptSelector = this.attrs['except-selector'];
+    const exceptSelector = this.get('except-selector');
     if (exceptSelector && $(e.target).closest(exceptSelector).length > 0) {
       return;
     }
