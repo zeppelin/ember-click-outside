@@ -1,9 +1,9 @@
-import Ember from 'ember';
 import ClickOutside from '../mixins/click-outside';
 import layout from '../templates/components/click-outside';
+import Component from 'ember-component';
+import on from 'ember-evented/on';
+import { next, cancel } from 'ember-runloop';
 import $ from 'jquery';
-const { Component, on, run } = Ember;
-const { next } = Ember.run;
 
 export default Component.extend(ClickOutside, {
   layout,
@@ -22,7 +22,7 @@ export default Component.extend(ClickOutside, {
   }),
 
   _removeClickOutsideHandler: on('willDestroyElement', function() {
-    run.cancel(this._cancelOutsideListerSetup);
+    cancel(this._cancelOutsideListerSetup);
     this.removeClickOutsideListener();
   })
 });
