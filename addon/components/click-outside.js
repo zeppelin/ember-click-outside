@@ -9,6 +9,10 @@ export default Component.extend(ClickOutside, {
   layout,
 
   clickOutside(e) {
+    if (this.isDestroying || this.isDestroyed) {
+      return;
+    }
+
     const exceptSelector = this.get('except-selector');
     if (exceptSelector && $(e.target).closest(exceptSelector).length > 0) {
       return;
