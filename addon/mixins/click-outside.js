@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import $ from 'jquery';
 
-const { computed, K } = Ember;
+const {
+  computed
+} = Ember;
 const bound = function(fnName) {
   return computed(fnName, function() {
     return this.get(fnName).bind(this);
@@ -9,7 +11,7 @@ const bound = function(fnName) {
 };
 
 export default Ember.Mixin.create({
-  clickOutside: K,
+  clickOutside() {},
   clickHandler: bound('outsideClickHandler'),
 
   outsideClickHandler(e) {
