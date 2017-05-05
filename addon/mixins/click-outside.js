@@ -6,7 +6,10 @@ const {
 } = Ember;
 const bound = function(fnName) {
   return computed(fnName, function() {
-    return this.get(fnName).bind(this);
+    let fn = this.get(fnName);
+    if (fn) { // https://github.com/zeppelin/ember-click-outside/issues/1
+      return fn.bind(this);
+    }
   });
 };
 
