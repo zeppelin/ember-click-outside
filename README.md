@@ -2,6 +2,14 @@
 
 A component and mixin for detecting clicks happened outside the element.
 
+## Installation
+
+From within your ember-cli project directory:
+
+```bash
+ember install ember-click-outside
+```
+
 ## Usage
 
 **As a component**
@@ -64,7 +72,6 @@ callback immediately.
 * `git clone https://github.com/zeppelin/ember-click-outside` this repository
 * `cd ember-click-outside`
 * `npm install`
-* `bower install`
 
 ### Running
 
