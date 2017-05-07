@@ -12,10 +12,33 @@ const bound = function(fnName) {
     }
   });
 };
+const supportsTouchEvents = () => {
+  return 'ontouchstart' in window || window.navigator.msMaxTouchPoints;
+};
 
 export default Ember.Mixin.create({
   clickOutside() {},
   clickHandler: bound('outsideClickHandler'),
+
+  didInsertElement() {
+    this._super(...arguments);
+
+    if (!supportsTouchEvents()) {
+      return;
+    }
+
+    $('body').css('cursor', 'pointer');
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    if (!supportsTouchEvents()) {
+      return;
+    }
+
+    $('body').css('cursor', '');
+  },
 
   outsideClickHandler(e) {
     const element = this.get('element');

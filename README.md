@@ -65,6 +65,28 @@ user interaction, usually a click. If the component attached the outside click
 event handler in the same loop, the handler would catch the event and fire the
 callback immediately.
 
+**Note:** If you need to override the `didInsertElement` and/or
+`willDestroyElement` lifecycle hooks, you must make sure to call
+`this._super(...arguments)` in them because the mixin implements them as well.
+
+```js
+export default Component.extend(ClickOutside, {
+  didInsertElement() {
+    this._super(...arguments);
+
+    // Something else you may want to run when the
+    // element in inserted in the DOM
+  },
+
+  willDestroyElement() {
+    this._super(...arguments);
+
+    // Something else you may want to run when the
+    // element in removed from the DOM
+  }
+});
+```
+
 ## Development
 
 ### Installation
