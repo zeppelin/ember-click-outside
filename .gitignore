@@ -7,7 +7,6 @@
 # dependencies
 /node_modules
 /bower_components
-bower.json
 
 # misc
 /.sass-cache
@@ -15,4 +14,10 @@ bower.json
 /coverage/*
 /libpeerconnection.log
 npm-debug.log*
+yarn-error.log
 testem.log
+
+# ember-try
+.node_modules.ember-try/
+bower.json.ember-try
+package.json.ember-try
