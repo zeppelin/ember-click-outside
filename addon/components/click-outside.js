@@ -18,7 +18,7 @@ export default Component.extend(ClickOutside, {
       return;
     }
 
-    this.sendAction();
+    this.sendAction(e);
   },
 
   _attachClickOutsideHandler: on('didInsertElement', function() {
