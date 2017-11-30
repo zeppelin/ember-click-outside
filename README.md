@@ -87,6 +87,12 @@ export default Component.extend(ClickOutside, {
 });
 ```
 
+## Behavior
+
+For every click in the document, `ember-click-outside` will check if the click target is outside of its component, and trigger the provided action/callback if so.
+
+If the click target cannot be found in the document (probably because it has been deleted before `ember-click-outside` detected the click), no action/callback is triggered, since we cannot check if it is inside or outside of the component.
+
 ## Development
 
 ### Installation
