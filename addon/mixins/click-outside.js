@@ -43,9 +43,16 @@ export default Ember.Mixin.create({
   outsideClickHandler(e) {
     const element = this.get('element');
     const $target = $(e.target);
+
+    // Check if the click target still is in the DOM.
+    // If not, there is no way to know if it was inside the element or not.
+    const isRemoved = $target.length === 0
+      || $.contains(document.documentElement, $target[0]) === false;
+
+    // Check the element is found as a parent of the click target.
     const isInside = $target.closest(element).length === 1;
 
-    if (!isInside) {
+    if (!isRemoved && !isInside) {
       this.clickOutside(e);
     }
   },
