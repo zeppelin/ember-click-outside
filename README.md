@@ -55,7 +55,7 @@ export default Component.extend(ClickOutside, {
   layout,
 
   clickOutside(e) {
-    this.sendAction(e);
+    this.get('action')(e);
   },
 
   _attachClickOutsideHandler: on('didInsertElement', function() {

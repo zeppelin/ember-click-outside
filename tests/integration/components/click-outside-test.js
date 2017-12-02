@@ -8,10 +8,11 @@ moduleForComponent('click-outside', 'Integration | Component | click outside', {
 });
 
 test('smoke test', function(assert) {
-  assert.expect(1);
+  assert.expect(2);
 
-  this.on('didClickOutside', function() {
+  this.on('didClickOutside', function(e) {
     assert.ok('`didClickOutside` fired only once');
+    assert.equal(e.target.className, 'outside', 'the event object was passed and is correct');
   });
 
   this.render(hbs`
@@ -32,6 +33,20 @@ test('smoke test', function(assert) {
     this.$('.inside').click();
     this.$('.outside').click();
   });
+});
+
+test(`it doesn't throw without an action handler`, function(assert) {
+  assert.expect(0);
+
+  this.render(hbs`
+    <div class="outside">Somewhere, over the rainbow...</div>
+
+    {{#click-outside}}
+      <div class="inside">We're in</div>
+    {{/click-outside}}
+  `);
+
+  this.$('.outside').click();
 });
 
 test('except selector', function(assert) {
