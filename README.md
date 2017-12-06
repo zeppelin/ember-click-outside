@@ -20,6 +20,17 @@ ember install ember-click-outside
 {{/click-outside}}
 ```
 
+```js
+ ...
+  actions: {
+    // Called on click outside
+    someAction(e /* click event object */) {
+
+    },
+  },
+  ...
+```
+
 If you wish to exclude certain elements from counting as outside clicks, use
 the `except-selector` attribute:
 
@@ -31,7 +42,7 @@ the `except-selector` attribute:
 
 **As a mixin**
 
-In fact, this is the actual implementation of the above component...
+In fact, here is a simplified of implementation of the above component...
 
 ```js
 import Ember from 'ember';
@@ -43,8 +54,8 @@ const { next } = Ember.run;
 export default Component.extend(ClickOutside, {
   layout,
 
-  clickOutside() {
-    this.sendAction();
+  clickOutside(e) {
+    this.get('action')(e);
   },
 
   _attachClickOutsideHandler: on('didInsertElement', function() {

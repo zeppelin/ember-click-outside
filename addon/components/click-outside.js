@@ -18,7 +18,10 @@ export default Component.extend(ClickOutside, {
       return;
     }
 
-    this.sendAction();
+    let action = this.get('action');
+    if (typeof action !== 'undefined') {
+      action(e);
+    }
   },
 
   _attachClickOutsideHandler: on('didInsertElement', function() {
