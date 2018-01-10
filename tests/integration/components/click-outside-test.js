@@ -1,7 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import Ember from 'ember';
-const { next } = Ember.run;
+import { next } from '@ember/runloop';
 
 moduleForComponent('click-outside', 'Integration | Component | click outside', {
   integration: true

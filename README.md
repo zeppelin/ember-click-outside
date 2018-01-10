@@ -45,13 +45,12 @@ the `except-selector` attribute:
 In fact, here is a simplified of implementation of the above component...
 
 ```js
-import Ember from 'ember';
-import ClickOutside from '../mixins/click-outside';
-import layout from '../templates/components/click-outside';
-const { Component, on } = Ember;
-const { next } = Ember.run;
+import Component from '@ember/component';
+import { on } from '@ember/event/on';
+import { next } from '@ember/runloop';
+import ClickOutsideMixin from 'ember-click-outside/mixins/click-outside';
 
-export default Component.extend(ClickOutside, {
+export default Component.extend(ClickOutsideMixin, {
   layout,
 
   clickOutside(e) {
@@ -81,7 +80,7 @@ callback immediately.
 `this._super(...arguments)` in them because the mixin implements them as well.
 
 ```js
-export default Component.extend(ClickOutside, {
+export default Component.extend(ClickOutsideMixin, {
   didInsertElement() {
     this._super(...arguments);
 

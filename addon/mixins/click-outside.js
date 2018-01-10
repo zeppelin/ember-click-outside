@@ -1,9 +1,7 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+import { computed } from '@ember/object';
 import $ from 'jquery';
 
-const {
-  computed
-} = Ember;
 const bound = function(fnName) {
   return computed(fnName, function() {
     let fn = this.get(fnName);
@@ -16,7 +14,7 @@ const supportsTouchEvents = () => {
   return 'ontouchstart' in window || window.navigator.msMaxTouchPoints;
 };
 
-export default Ember.Mixin.create({
+export default Mixin.create({
   clickOutside() {},
   clickHandler: bound('outsideClickHandler'),
 

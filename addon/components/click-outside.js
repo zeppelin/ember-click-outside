@@ -1,12 +1,10 @@
 import ClickOutside from '../mixins/click-outside';
-import layout from '../templates/components/click-outside';
-import Component from 'ember-component';
-import on from 'ember-evented/on';
-import { next, cancel } from 'ember-runloop';
+import Component from '@ember/component';
+import { on } from '@ember/object/evented';
+import { next, cancel } from '@ember/runloop';
 import $ from 'jquery';
 
 export default Component.extend(ClickOutside, {
-  layout,
 
   clickOutside(e) {
     if (this.isDestroying || this.isDestroyed) {
