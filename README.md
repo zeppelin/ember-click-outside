@@ -48,7 +48,7 @@ In fact, here is a simplified of implementation of the above component...
 import Component from '@ember/component';
 import { on } from '@ember/event/on';
 import { next } from '@ember/runloop';
-import ClickOutsideMixin from 'ember-click-outside/mixins/click-outside';
+import ClickOutsideMixin from 'ember-click-outside/mixin';
 
 export default Component.extend(ClickOutsideMixin, {
   layout,

@@ -1,2 +1,1 @@
-import ClickOutsideMixin from 'ember-click-outside/mixins/click-outside';
-export default ClickOutsideMixin;
+export { default } from 'ember-click-outside/mixin';
