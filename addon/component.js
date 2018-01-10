@@ -1,6 +1,5 @@
 import ClickOutsideMixin from './mixin';
 import Component from '@ember/component';
-import { on } from '@ember/object/evented';
 import { next, cancel } from '@ember/runloop';
 import $ from 'jquery';
 
@@ -22,12 +21,13 @@ export default Component.extend(ClickOutsideMixin, {
     }
   },
 
-  _attachClickOutsideHandler: on('didInsertElement', function() {
+  didInsertElement() {
+    this._super(...arguments);
     this._cancelOutsideListenerSetup = next(this, this.addClickOutsideListener);
-  }),
+  },
 
-  _removeClickOutsideHandler: on('willDestroyElement', function() {
+  willDestroyElement() {
     cancel(this._cancelOutsideListerSetup);
     this.removeClickOutsideListener();
-  })
+  }
 });
