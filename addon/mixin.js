@@ -1,6 +1,5 @@
 import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
-import $ from 'jquery';
 
 const bound = function(fnName) {
   return computed(fnName, function() {
@@ -26,7 +25,7 @@ export default Mixin.create({
       return;
     }
 
-    $('body').css('cursor', 'pointer');
+    document.body.style.cursor = 'pointer';
   },
 
   willDestroyElement() {
@@ -36,20 +35,18 @@ export default Mixin.create({
       return;
     }
 
-    $('body').css('cursor', '');
+    document.body.style.cursor = '';
   },
 
   outsideClickHandler(e) {
     const element = this.get('element');
-    const $target = $(e.target);
 
     // Check if the click target still is in the DOM.
     // If not, there is no way to know if it was inside the element or not.
-    const isRemoved = $target.length === 0
-      || $.contains(document.documentElement, $target[0]) === false;
+    const isRemoved = !e.target || !document.contains(e.target);
 
     // Check the element is found as a parent of the click target.
-    const isInside = $target.closest(element).length === 1;
+    const isInside = element === e.target || element.contains(e.target);
 
     if (!isRemoved && !isInside) {
       this.clickOutside(e);
@@ -58,11 +55,11 @@ export default Mixin.create({
 
   addClickOutsideListener() {
     const clickHandler = this.get('clickHandler');
-    $(window).on('click', clickHandler);
+    document.addEventListener('click', clickHandler);
   },
 
   removeClickOutsideListener() {
     const clickHandler = this.get('clickHandler');
-    $(window).off('click', clickHandler);
+    document.removeEventListener('click', clickHandler);
   }
 });
