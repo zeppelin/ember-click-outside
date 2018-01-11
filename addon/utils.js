@@ -1,4 +1,15 @@
 /* eslint no-console: "off" */
+import matches from 'npm:matches-selector';
+
+export function closest(element, selector) {
+  while (element.parentNode) {
+    element = element.parentNode;
+
+    if (matches(element, selector)) {
+      return element;
+    }
+  }
+}
 
 // https://github.com/mike-north/ember-deprecated/blob/master/addon/utils.js
 export function printConsoleMessage(msg) {
