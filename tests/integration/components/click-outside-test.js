@@ -1,6 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { next } from '@ember/runloop';
+import { click } from 'ember-native-dom-helpers';
 
 moduleForComponent('click-outside', 'Integration | Component | click outside', {
   integration: true
@@ -29,8 +30,8 @@ test('smoke test', function(assert) {
   // event handler in the same loop, the handler would catch the event and send
   // the action immediately.
   next(()=> {
-    this.$('.inside').click();
-    this.$('.outside').click();
+    click('.inside');
+    click('.outside');
   });
 });
 
@@ -45,7 +46,7 @@ test(`it doesn't throw without an action handler`, function(assert) {
     {{/click-outside}}
   `);
 
-  this.$('.outside').click();
+  click('.outside');
 });
 
 test('except selector', function(assert) {
@@ -75,8 +76,8 @@ test('except selector', function(assert) {
   // event handler in the same loop, the handler would catch the event and send
   // the action immediately.
   next(()=> {
-    this.$('.outside').click();
-    this.$('.except-outside div').click();
+    click('.outside');
+    click('.except-outside div');
   });
 
 });
