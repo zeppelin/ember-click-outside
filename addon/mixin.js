@@ -1,9 +1,10 @@
 import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
+import { get } from '@ember/object';
 
 const bound = function(fnName) {
   return computed(fnName, function() {
-    let fn = this.get(fnName);
+    let fn = get(this, fnName);
     if (fn) { // https://github.com/zeppelin/ember-click-outside/issues/1
       return fn.bind(this);
     }
@@ -39,7 +40,7 @@ export default Mixin.create({
   },
 
   outsideClickHandler(e) {
-    const element = this.get('element');
+    const element = get(this, 'element');
 
     // Check if the click target still is in the DOM.
     // If not, there is no way to know if it was inside the element or not.
@@ -54,12 +55,12 @@ export default Mixin.create({
   },
 
   addClickOutsideListener() {
-    const clickHandler = this.get('clickHandler');
+    const clickHandler = get(this, 'clickHandler');
     document.addEventListener('click', clickHandler);
   },
 
   removeClickOutsideListener() {
-    const clickHandler = this.get('clickHandler');
+    const clickHandler = get(this, 'clickHandler');
     document.removeEventListener('click', clickHandler);
   }
 });

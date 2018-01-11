@@ -2,6 +2,7 @@ import ClickOutsideMixin from './mixin';
 import Component from '@ember/component';
 import { next, cancel } from '@ember/runloop';
 import { closest } from './utils';
+import { get } from '@ember/object';
 
 export default Component.extend(ClickOutsideMixin, {
 
@@ -10,12 +11,12 @@ export default Component.extend(ClickOutsideMixin, {
       return;
     }
 
-    const exceptSelector = this.get('except-selector');
+    const exceptSelector = get(this, 'except-selector');
     if (exceptSelector && closest(e.target, exceptSelector)) {
       return;
     }
 
-    let action = this.get('action');
+    let action = get(this, 'action');
     if (typeof action !== 'undefined') {
       action(e);
     }
