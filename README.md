@@ -2,15 +2,16 @@
 
 A component and mixin for detecting clicks happened outside the element.
 
-## Installation
 
-From within your ember-cli project directory:
+## Usage
+
+From within your ember-cli project directory install the addon:
 
 ```bash
 ember install ember-click-outside
 ```
 
-## Usage
+Then:
 
 **As a component**
 
@@ -45,13 +46,12 @@ the `except-selector` attribute:
 In fact, here is a simplified of implementation of the above component...
 
 ```js
-import Ember from 'ember';
-import ClickOutside from '../mixins/click-outside';
-import layout from '../templates/components/click-outside';
-const { Component, on } = Ember;
-const { next } = Ember.run;
+import Component from '@ember/component';
+import { on } from '@ember/event/on';
+import { next } from '@ember/runloop';
+import ClickOutsideMixin from 'ember-click-outside/mixin';
 
-export default Component.extend(ClickOutside, {
+export default Component.extend(ClickOutsideMixin, {
   layout,
 
   clickOutside(e) {
@@ -81,7 +81,7 @@ callback immediately.
 `this._super(...arguments)` in them because the mixin implements them as well.
 
 ```js
-export default Component.extend(ClickOutside, {
+export default Component.extend(ClickOutsideMixin, {
   didInsertElement() {
     this._super(...arguments);
 
@@ -104,26 +104,24 @@ For every click in the document, `ember-click-outside` will check if the click t
 
 If the click target cannot be found in the document (probably because it has been deleted before `ember-click-outside` detected the click), no action/callback is triggered, since we cannot check if it is inside or outside of the component.
 
-## Development
+## Installation
 
-### Installation
-
-* `git clone https://github.com/zeppelin/ember-click-outside` this repository
+* `git clone <repository-url>` this repository
 * `cd ember-click-outside`
-* `npm install`
+* `yarn install`
 
-### Running
+## Running
 
 * `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 
-### Running Tests
+## Running Tests
 
-* `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
+* `yarn test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
-### Building
+## Building
 
 * `ember build`
 
