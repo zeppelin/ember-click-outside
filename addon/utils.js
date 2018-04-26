@@ -1,5 +1,5 @@
 /* eslint no-console: "off" */
-import matches from 'npm:matches-selector';
+import { matches } from './-private/matches-selector';
 
 export function closest(element, selector) {
   while (element.parentNode) {
