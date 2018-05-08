@@ -47,7 +47,7 @@ In fact, here is a simplified of implementation of the above component...
 
 ```js
 import Component from '@ember/component';
-import { on } from '@ember/event/on';
+import { on } from '@ember/object/evented';
 import { next } from '@ember/runloop';
 import ClickOutsideMixin from 'ember-click-outside/mixin';
 
