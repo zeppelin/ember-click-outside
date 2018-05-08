@@ -19,11 +19,9 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-browserify": "^1.2.0",
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^2.0.1",
-    "ember-native-dom-helpers": "^0.5.10",
-    "matches-selector": "^1.2.0"
+    "ember-native-dom-helpers": "^0.5.10"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
