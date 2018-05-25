@@ -17,7 +17,7 @@ export default Component.extend(ClickOutsideMixin, {
     }
 
     let action = get(this, 'action');
-    if (typeof action !== 'undefined') {
+    if (typeof action === 'function') {
       action(e);
     }
   },
