@@ -28,7 +28,7 @@ export default Component.extend(ClickOutsideMixin, {
   },
 
   willDestroyElement() {
-    cancel(this._cancelOutsideListerSetup);
+    cancel(this._cancelOutsideListenerSetup);
     this.removeClickOutsideListener();
   }
 });
