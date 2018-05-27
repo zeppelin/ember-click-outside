@@ -15,6 +15,15 @@ const supportsTouchEvents = () => {
   return 'ontouchstart' in window || window.navigator.msMaxTouchPoints;
 };
 
+const documentOrBodyContains = (element) => {
+  // https://github.com/zeppelin/ember-click-outside/issues/30
+  if (typeof document.contains === 'function') {
+    return document.contains(element);
+  } else {
+    document.body.contains(element);
+  }
+}
+
 export default Mixin.create({
   clickOutside() {},
   clickHandler: bound('outsideClickHandler'),
@@ -44,7 +53,7 @@ export default Mixin.create({
 
     // Check if the click target still is in the DOM.
     // If not, there is no way to know if it was inside the element or not.
-    const isRemoved = !e.target || !document.contains(e.target);
+    const isRemoved = !e.target || !documentOrBodyContains(e.target);
 
     // Check the element is found as a parent of the click target.
     const isInside = element === e.target || element.contains(e.target);
