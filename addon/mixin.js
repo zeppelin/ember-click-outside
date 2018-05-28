@@ -11,8 +11,8 @@ const bound = function(fnName) {
   });
 };
 
-const supportsTouchEvents = () => {
-  return 'ontouchstart' in window || window.navigator.msMaxTouchPoints;
+const ios = () => {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 };
 
 export default Mixin.create({
@@ -22,7 +22,7 @@ export default Mixin.create({
   didInsertElement() {
     this._super(...arguments);
 
-    if (!supportsTouchEvents()) {
+    if (!ios()) {
       return;
     }
 
@@ -32,7 +32,7 @@ export default Mixin.create({
   willDestroyElement() {
     this._super(...arguments);
 
-    if (!supportsTouchEvents()) {
+    if (!ios()) {
       return;
     }
 
