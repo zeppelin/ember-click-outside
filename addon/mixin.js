@@ -30,8 +30,9 @@ export default Mixin.create({
 
   didInsertElement() {
     this._super(...arguments);
-
-    if (!supportsTouchEvents()) {
+    
+    // https://github.com/zeppelin/ember-click-outside/issues/25
+    if (supportsTouchEvents()) {
       return;
     }
 
@@ -41,7 +42,7 @@ export default Mixin.create({
   willDestroyElement() {
     this._super(...arguments);
 
-    if (!supportsTouchEvents()) {
+    if (supportsTouchEvents()) {
       return;
     }
 
