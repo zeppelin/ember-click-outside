@@ -1,5 +1,8 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
-
+{{#click-outside action=(action "alert") class='card'}}
+  <h1>Demo click outside component</h1>
+  <p>
+    Action will only fire when clicking outside it. See the readme for details
+    on how to achieve this with a mixin and other configuration options.
+  </p>
+{{/click-outside}}
 {{outlet}}
