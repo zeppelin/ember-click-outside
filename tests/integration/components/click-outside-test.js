@@ -60,9 +60,7 @@ module('click-outside', 'Integration | Component | click outside', function(hook
       <div class="outside">Somewhere, over the rainbow...</div>
 
       <div class="except-outside">
-        <div>
-          Somewhere, under the rainbow...
-        </div>
+        Somewhere, under the rainbow...
       </div>
 
       {{#click-outside except-selector=".except-outside" action=(action didClickOutside)}}
@@ -77,7 +75,7 @@ module('click-outside', 'Integration | Component | click outside', function(hook
     // the action immediately.
     await next(async ()=> {
       await click('.outside');
-      await click('.except-outside div');
+      await click('.except-outside');
     });
   });
 });
