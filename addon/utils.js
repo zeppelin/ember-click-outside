@@ -2,6 +2,10 @@
 import { matches } from './-private/matches-selector';
 
 export function closest(element, selector) {
+  if (matches(element, selector)) {
+    return element;
+  }
+
   while (element.parentNode) {
     element = element.parentNode;
 
