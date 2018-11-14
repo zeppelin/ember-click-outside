@@ -20,7 +20,7 @@ const documentOrBodyContains = (element) => {
   if (typeof document.contains === 'function') {
     return document.contains(element);
   } else {
-    document.body.contains(element);
+    return document.body.contains(element);
   }
 }
 
