@@ -15,6 +15,15 @@ const ios = () => {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 };
 
+const documentOrBodyContains = (element) => {
+  // https://github.com/zeppelin/ember-click-outside/issues/30
+  if (typeof document.contains === 'function') {
+    return document.contains(element);
+  } else {
+    return document.body.contains(element);
+  }
+}
+
 export default Mixin.create({
   clickOutside() {},
   clickHandler: bound('outsideClickHandler'),
@@ -40,10 +49,22 @@ export default Mixin.create({
   },
 
   outsideClickHandler(e) {
-    const isOnPath = e.path.includes(get(this, 'element'));
+    const element = get(this, 'element');
+    const path = event.path || (event.composedPath && event.composedPath());
 
-    if (!isOnPath) {
-      this.clickOutside(e);
+    if (path) {
+      path.includes(element) || this.clickOutside(e);
+    } else {
+      // Check if the click target still is in the DOM.
+      // If not, there is no way to know if it was inside the element or not.
+      const isRemoved = !e.target || !documentOrBodyContains(e.target);
+
+      // Check the element is found as a parent of the click target.
+      const isInside = element === e.target || element.contains(e.target);
+
+      if (!isRemoved && !isInside) {
+        this.clickOutside(e);
+      }
     }
   },
 
