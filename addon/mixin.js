@@ -50,6 +50,7 @@ export default Mixin.create({
 
   outsideClickHandler(e) {
     const element = get(this, 'element');
+    const event = event || e;
     const path = event.path || (event.composedPath && event.composedPath());
 
     if (path) {
