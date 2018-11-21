@@ -17,6 +17,7 @@ module('click-outside', 'Integration | Component | click outside', function(hook
 
     await render(hbs`
       <div class="outside">Somewhere, over the rainbow...</div>
+
       {{#click-outside action=(action didClickOutside)}}
         <div class="inside">We're in</div>
       {{/click-outside}}
@@ -39,6 +40,7 @@ module('click-outside', 'Integration | Component | click outside', function(hook
 
     await render(hbs`
       <div class="outside">Somewhere, over the rainbow...</div>
+
       {{#click-outside}}
         <div class="inside">We're in</div>
       {{/click-outside}}
@@ -56,9 +58,11 @@ module('click-outside', 'Integration | Component | click outside', function(hook
 
     await render(hbs`
       <div class="outside">Somewhere, over the rainbow...</div>
+
       <div class="except-outside">
         Somewhere, under the rainbow...
       </div>
+
       {{#click-outside except-selector=".except-outside" action=(action didClickOutside)}}
       {{/click-outside}}
     `);
