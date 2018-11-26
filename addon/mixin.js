@@ -50,16 +50,21 @@ export default Mixin.create({
 
   outsideClickHandler(e) {
     const element = get(this, 'element');
+    const path = e.path || (e.composedPath && e.composedPath());
 
-    // Check if the click target still is in the DOM.
-    // If not, there is no way to know if it was inside the element or not.
-    const isRemoved = !e.target || !documentOrBodyContains(e.target);
+    if (path) {
+      path.includes(element) || this.clickOutside(e);
+    } else {
+      // Check if the click target still is in the DOM.
+      // If not, there is no way to know if it was inside the element or not.
+      const isRemoved = !e.target || !documentOrBodyContains(e.target);
 
-    // Check the element is found as a parent of the click target.
-    const isInside = element === e.target || element.contains(e.target);
+      // Check the element is found as a parent of the click target.
+      const isInside = element === e.target || element.contains(e.target);
 
-    if (!isRemoved && !isInside) {
-      this.clickOutside(e);
+      if (!isRemoved && !isInside) {
+        this.clickOutside(e);
+      }
     }
   },
 

@@ -78,4 +78,31 @@ module('click-outside', 'Integration | Component | click outside', function(hook
       await click('.except-outside');
     });
   });
+  
+  test('handle removed DOM element outside', async function(assert) {
+    assert.expect(1);
+
+    this.set('didClickOutside', () => {
+      assert.ok('`didClickOutside` fired only once');
+    });
+
+    this.set('toggleFlag', () => {
+      this.set('topSide', true);
+    });
+
+    await render(hbs`
+      {{#if topSide}}
+        Blue
+      {{else}}
+        <div class="outside" {{action "toggleFlag"}}>Yellow</div>
+      {{/if}}
+      
+      {{#click-outside action=(action didClickOutside)}}
+      {{/click-outside}}
+    `);
+
+    await next(async () => {
+      await click('.outside');
+    });
+  });
 });
