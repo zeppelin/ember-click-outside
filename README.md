@@ -70,7 +70,7 @@ export default Component.extend(ClickOutsideMixin, {
 ```
 
 **Note:** You should almost always call `this.addClickOutsideListener` inside
-the next run loop when you want to set it un on `didInsertElement`. The reason
+the next run loop when you want to set it up on `didInsertElement`. The reason
 for this is more often than not the component is rendered as a result of some
 user interaction, usually a click. If the component attached the outside click
 event handler in the same loop, the handler would catch the event and fire the
