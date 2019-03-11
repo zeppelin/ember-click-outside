@@ -127,4 +127,26 @@ module('click-outside', 'Integration | Component | click outside', function(hook
       await click('.outside');
     });
   });
+
+
+  test('`action` handler is still valid', async function(assert) {
+    assert.expect(1);
+
+    this.setProperties({
+      onClickOutside: () => assert.ok('`onClickOutside` fired once')
+    });
+
+    await render(hbs`
+      <div class="outside">Somewhere, over the rainbow...</div>
+
+      {{#click-outside action=(action onClickOutside)}}
+        <div class="inside">We're in</div>
+      {{/click-outside}}
+    `);
+
+    await next(async ()=> {
+      await click('.inside');
+      await click('.outside');
+    });
+  });
 });

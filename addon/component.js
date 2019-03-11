@@ -16,17 +16,23 @@ export default Component.extend(ClickOutsideMixin, {
       return;
     }
 
-    // `onClickOutside` handler supersedes the deprecated `action` handler
     let onClickOutside = get(this, 'onClickOutside');
+    let action = get(this, 'action');
+
+    if (typeof onClickOutside === 'function' && typeof action === 'function') {
+      printConsoleMessage(`You've defined both 'onClickOutside' and 'action' handlers. Please use only 'onClickOutside' instead.`);
+    }
+
+    // `onClickOutside` handler supersedes the deprecated `action` handler
     if (typeof onClickOutside === 'function') {
       onClickOutside(e);
 
       return;
     }
 
-    let action = get(this, 'action');
     if (typeof action === 'function') {
       printConsoleMessage(`Using 'action' is deprecated. Please use 'onClickOutside' instead.`);
+
       action(e);
     }
   },
