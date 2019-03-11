@@ -3,7 +3,7 @@ import Component from '@ember/component';
 import { next, cancel } from '@ember/runloop';
 import { closest } from './utils';
 import { get } from '@ember/object';
-import { printConsoleMessage } from '../utils';
+import { printConsoleMessage } from './utils';
 
 export default Component.extend(ClickOutsideMixin, {
 
