@@ -1,9 +1,8 @@
 import ClickOutsideMixin from './mixin';
 import Component from '@ember/component';
 import { next, cancel } from '@ember/runloop';
-import { closest } from './utils';
+import { closest, printConsoleMessage } from './utils';
 import { get } from '@ember/object';
-import { printConsoleMessage } from './utils';
 
 export default Component.extend(ClickOutsideMixin, {
 
