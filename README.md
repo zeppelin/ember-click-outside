@@ -2,8 +2,7 @@
 
 A component and mixin for detecting clicks happened outside the element.
 
-
-## Usage
+## Installation
 
 From within your ember-cli project directory install the addon:
 
@@ -11,18 +10,18 @@ From within your ember-cli project directory install the addon:
 ember install ember-click-outside
 ```
 
-Then:
+## Usage
 
-**As a component**
+### As a component
 
 ```hbs
-{{#click-outside action=(action "someAction")}}
+{{#click-outside onClickOutside=(action "someAction")}}
   Your HTML...
 {{/click-outside}}
 ```
 
 ```js
- ...
+  ...
   actions: {
     // Called on click outside
     someAction(e /* click event object */) {
@@ -36,14 +35,14 @@ If you wish to exclude certain elements from counting as outside clicks, use
 the `except-selector` attribute:
 
 ```hbs
-{{#click-outside action=(action "someAction") except-selector=".some-selector"}}
+{{#click-outside onClickOutside=(action "someAction") except-selector=".some-selector"}}
   Your HTML...
 {{/click-outside}}
 ```
 
-**As a mixin**
+### As a mixin
 
-In fact, here is a simplified of implementation of the above component...
+In fact, here is a simplified version of the implementation of the component above:
 
 ```js
 import Component from '@ember/component';
@@ -52,10 +51,8 @@ import { next } from '@ember/runloop';
 import ClickOutsideMixin from 'ember-click-outside/mixin';
 
 export default Component.extend(ClickOutsideMixin, {
-  layout,
-
   clickOutside(e) {
-    this.get('action')(e);
+    this.get('onClickOutside')(e);
   },
 
   _attachClickOutsideHandler: on('didInsertElement', function() {
@@ -66,7 +63,6 @@ export default Component.extend(ClickOutsideMixin, {
     this.removeClickOutsideListener();
   })
 });
-
 ```
 
 **Note:** You should almost always call `this.addClickOutsideListener` inside
@@ -103,26 +99,3 @@ export default Component.extend(ClickOutsideMixin, {
 For every click in the document, `ember-click-outside` will check if the click target is outside of its component, and trigger the provided action/callback if so.
 
 If the click target cannot be found in the document (probably because it has been deleted before `ember-click-outside` detected the click), no action/callback is triggered, since we cannot check if it is inside or outside of the component.
-
-## Installation
-
-* `git clone <repository-url>` this repository
-* `cd ember-click-outside`
-* `yarn install`
-
-## Running
-
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-## Running Tests
-
-* `yarn test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).

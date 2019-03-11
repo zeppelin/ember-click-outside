@@ -3,6 +3,7 @@ import Component from '@ember/component';
 import { next, cancel } from '@ember/runloop';
 import { closest } from './utils';
 import { get } from '@ember/object';
+import { printConsoleMessage } from '../utils';
 
 export default Component.extend(ClickOutsideMixin, {
 
@@ -16,8 +17,17 @@ export default Component.extend(ClickOutsideMixin, {
       return;
     }
 
+    // `onClickOutside` handler supersedes the deprecated `action` handler
+    let onClickOutside = get(this, 'onClickOutside');
+    if (typeof onClickOutside === 'function') {
+      onClickOutside(e);
+
+      return;
+    }
+
     let action = get(this, 'action');
     if (typeof action === 'function') {
+      printConsoleMessage(`Using 'action' is deprecated. Please use 'onClickOutside' instead.`);
       action(e);
     }
   },
