@@ -1,3 +1,7 @@
+## 1.0.4
+
+* Remove unused dependencies: ember-native-dom-helpers, ember-ajax, ember-welcome-page ([#41](https://github.com/zeppelin/ember-click-outside/pull/46)) by [@AndreJoaquim](https://github.com/AndreJoaquim)
+
 ## 1.0.3
 
 * Improve handling for dynamic content ([#41](https://github.com/zeppelin/ember-click-outside/pull/41)) by [@alex-konoval](https://github.com/alex-konoval)
