@@ -15,6 +15,19 @@ export function closest(element, selector) {
   }
 }
 
+export const documentOrBodyContains = (element) => {
+  // https://github.com/zeppelin/ember-click-outside/issues/30
+  if (typeof document.contains === 'function') {
+    return document.contains(element);
+  } else {
+    return document.body.contains(element);
+  }
+}
+
+export const ios = () => {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+};
+
 // https://github.com/mike-north/ember-deprecated/blob/master/addon/utils.js
 export function printConsoleMessage(msg) {
   if (console.trace) {
