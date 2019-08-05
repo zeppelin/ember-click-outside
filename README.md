@@ -32,10 +32,10 @@ ember install ember-click-outside
 ```
 
 If you wish to exclude certain elements from counting as outside clicks, use
-the `except-selector` attribute:
+the `exceptSelector` attribute:
 
 ```hbs
-{{#click-outside onClickOutside=(action "someAction") except-selector=".some-selector"}}
+{{#click-outside onClickOutside=(action "someAction") exceptSelector=".some-selector"}}
   Your HTML...
 {{/click-outside}}
 ```
