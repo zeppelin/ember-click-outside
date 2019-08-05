@@ -1,39 +1,34 @@
 import ClickOutsideMixin from './mixin';
 import Component from '@ember/component';
 import { next, cancel } from '@ember/runloop';
-import { closest, printConsoleMessage } from './utils';
+import { closest } from './utils';
 import { get } from '@ember/object';
+import { deprecatingAlias } from '@ember/object/computed';
 
 export default Component.extend(ClickOutsideMixin, {
+  'except-selector': deprecatingAlias('exceptSelector', {
+    id: 'ember-click-outside.kebab-cased-props',
+    until: '2.0.0'
+  }),
+
+  action: deprecatingAlias('onClickOutside', {
+    id: 'ember-click-outside.action-prop',
+    until: '2.0.0'
+  }),
 
   clickOutside(e) {
     if (this.isDestroying || this.isDestroyed) {
       return;
     }
 
-    const exceptSelector = get(this, 'except-selector');
+    const exceptSelector = get(this, 'exceptSelector');
     if (exceptSelector && closest(e.target, exceptSelector)) {
       return;
     }
 
     let onClickOutside = get(this, 'onClickOutside');
-    let action = get(this, 'action');
-
-    if (typeof onClickOutside === 'function' && typeof action === 'function') {
-      printConsoleMessage(`You've defined both 'onClickOutside' and 'action' handlers. Please use only 'onClickOutside' instead.`);
-    }
-
-    // `onClickOutside` handler supersedes the deprecated `action` handler
     if (typeof onClickOutside === 'function') {
       onClickOutside(e);
-
-      return;
-    }
-
-    if (typeof action === 'function') {
-      printConsoleMessage(`Using 'action' is deprecated. Please use 'onClickOutside' instead.`);
-
-      action(e);
     }
   },
 
