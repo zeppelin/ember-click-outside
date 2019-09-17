@@ -52,6 +52,14 @@ the `exceptSelector` attribute:
 </ClickOutside>
 ```
 
+You can listen for events other than `click` by using the `eventType` attribute:
+
+```hbs
+<ClickOutside @onClickOutside={{action "someAction"}} @eventType="mousedown">
+  Your HTML...
+</ClickOutside>
+```
+
 ### As a mixin
 
 This is somewhat more advanced, but if that's fine, feel free:
