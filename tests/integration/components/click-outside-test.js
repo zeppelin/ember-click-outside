@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { next } from '@ember/runloop';
-import { render, click } from '@ember/test-helpers';
+import { render, click, triggerEvent } from '@ember/test-helpers';
 
 module('component', 'Integration | Component | click outside', function(hooks) {
   setupRenderingTest(hooks);
@@ -139,6 +139,33 @@ module('component', 'Integration | Component | click outside', function(hooks) {
     });
 
     assert.expectDeprecation();
+  });
+
+  test('event type', async function(assert) {
+    assert.expect(1);
+
+    this.set('didClickOutside', () => {
+      assert.ok('`didClickOutside` fired only once');
+    });
+
+    this.set('toggleFlag', () => {
+      this.set('topSide', true);
+    });
+
+    await render(hbs`
+      {{#if topSide}}
+        Blue
+      {{else}}
+        <div class="outside" {{action "toggleFlag"}}>Yellow</div>
+      {{/if}}
+
+      {{#click-outside eventType='mousedown' onClickOutside=(action didClickOutside)}}
+      {{/click-outside}}
+    `);
+
+    await next(async () => {
+      await triggerEvent('.outside', 'mousedown');
+    });
   });
 
   test('handle removed DOM element outside', async function(assert) {
