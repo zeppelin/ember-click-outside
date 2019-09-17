@@ -128,7 +128,7 @@ module('modifier', 'Integration | Modifier | on-click-outside', function(hooks) 
 
       <div
         {{on-click-outside (action didClickOutside)
-          event="mousedown"
+          eventType="mousedown"
         }}
       ></div>
     `);
