@@ -4,7 +4,7 @@ import hbs from 'htmlbars-inline-precompile';
 import { next } from '@ember/runloop';
 import { render, click } from '@ember/test-helpers';
 
-module('click-outside', 'Integration | Component | click outside', function(hooks) {
+module('component', 'Integration | Component | click outside', function(hooks) {
   setupRenderingTest(hooks);
 
   test('smoke test', async function(assert) {
@@ -33,6 +33,36 @@ module('click-outside', 'Integration | Component | click outside', function(hook
       await click('.inside');
       await click('.outside');
     });
+  });
+
+  test('real-world scenario', async function(assert) {
+    this.isOpened = false;
+
+    this.open = () => {
+      this.set('isOpened', true);
+    };
+
+    this.close = () => {
+      assert.ok(true, 'The close handler was called');
+      this.set('isOpened', false);
+    };
+
+    await render(hbs`
+      <button data-test-open onclick={{action this.open}}>
+        Toggle popover
+      </button>
+
+      <div data-test-outside>Outside</div>
+
+      {{#if this.isOpened}}
+        {{#click-outside onClickOutside=(action this.close)}}
+          Popover is opened.
+        {{/click-outside}}
+      {{/if}}
+    `);
+
+    await click('[data-test-open]');
+    await click('[data-test-outside]');
   });
 
   test(`it doesn't throw without an onClickOutside handler`, async function(assert) {

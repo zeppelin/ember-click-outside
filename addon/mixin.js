@@ -2,6 +2,8 @@ import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
 import { get } from '@ember/object';
 
+import { documentOrBodyContains, ios } from './utils';
+
 const bound = function(fnName) {
   return computed(fnName, function() {
     let fn = get(this, fnName);
@@ -10,19 +12,6 @@ const bound = function(fnName) {
     }
   });
 };
-
-const ios = () => {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-};
-
-const documentOrBodyContains = (element) => {
-  // https://github.com/zeppelin/ember-click-outside/issues/30
-  if (typeof document.contains === 'function') {
-    return document.contains(element);
-  } else {
-    return document.body.contains(element);
-  }
-}
 
 export default Mixin.create({
   clickOutside() {},

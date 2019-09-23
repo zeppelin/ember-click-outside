@@ -1,6 +1,8 @@
 # ember-click-outside [![Build Status](https://travis-ci.org/zeppelin/ember-click-outside.svg)](https://travis-ci.org/zeppelin/ember-click-outside) [![Ember Observer Score](http://emberobserver.com/badges/ember-click-outside.svg)](http://emberobserver.com/addons/ember-click-outside)
 
-A component and mixin for detecting clicks happened outside the element.
+A set of tools for detecting click events fired outside an element.
+
+![click outside logo](click-outside-logo.png)
 
 ## Installation
 
@@ -12,12 +14,22 @@ ember install ember-click-outside
 
 ## Usage
 
+### As element modifier (recommended)
+
+```hbs
+<div {{on-click-outside (action "someAction")}}>
+  Your HTML...
+</div>
+```
+
+*If you're running ember-source <3.8, you need install [ember-modifier-manager-polyfill](https://github.com/rwjblue/ember-modifier-manager-polyfill) to get the modifier working.*
+
 ### As a component
 
 ```hbs
-{{#click-outside onClickOutside=(action "someAction")}}
+<ClickOutside @onClickOutside={{action "someAction"}}>
   Your HTML...
-{{/click-outside}}
+</ClickOutside>
 ```
 
 ```js
@@ -35,14 +47,19 @@ If you wish to exclude certain elements from counting as outside clicks, use
 the `exceptSelector` attribute:
 
 ```hbs
-{{#click-outside onClickOutside=(action "someAction") exceptSelector=".some-selector"}}
+<ClickOutside @onClickOutside={{action "someAction"}} @exceptSelector=".some-selector">
   Your HTML...
-{{/click-outside}}
+</ClickOutside>
 ```
 
 ### As a mixin
 
-In fact, here is a simplified version of the implementation of the component above:
+This is somewhat more advanced, but if that's fine, feel free:
+
+<details>
+<summary>Using ember-click-outside component mixin</summary>
+
+Here is a simplified version of the implementation of the component above:
 
 ```js
 import Component from '@ember/component';
@@ -93,6 +110,7 @@ export default Component.extend(ClickOutsideMixin, {
   }
 });
 ```
+</details>
 
 ## Behavior
 
