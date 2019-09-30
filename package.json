@@ -50,7 +50,7 @@
     "loader.js": "^4.2.3"
   },
   "engines": {
-    "node": ">= 7.*"
+    "node": "^6.* || >= 7.*"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"
