@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { render, click } from '@ember/test-helpers';
+import { render, click, triggerEvent } from '@ember/test-helpers';
 
 module('modifier', 'Integration | Modifier | on-click-outside', function(hooks) {
   setupRenderingTest(hooks);
@@ -114,5 +114,25 @@ module('modifier', 'Integration | Modifier | on-click-outside', function(hooks) 
     `);
 
     await click('.outside');
+  });
+
+  test('custom event', async function(assert) {
+    assert.expect(1);
+
+    this.set('didClickOutside', ()=> {
+      assert.ok('`didClickOutside` fired only once');
+    });
+
+    await render(hbs`
+      <div class="outside">Somewhere, over the rainbow...</div>
+
+      <div
+        {{on-click-outside (action didClickOutside)
+          eventType="mousedown"
+        }}
+      ></div>
+    `);
+
+    await triggerEvent('.outside', 'mousedown');
   });
 });

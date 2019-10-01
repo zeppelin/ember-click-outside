@@ -60,12 +60,14 @@ export default Mixin.create({
   },
 
   addClickOutsideListener() {
+    const eventType = this.eventType || 'click';
     const clickHandler = get(this, 'clickHandler');
-    document.addEventListener('click', clickHandler);
+    document.addEventListener(eventType, clickHandler);
   },
 
   removeClickOutsideListener() {
+    const eventType = this.eventType || 'click';
     const clickHandler = get(this, 'clickHandler');
-    document.removeEventListener('click', clickHandler);
+    document.removeEventListener(eventType, clickHandler);
   }
 });
