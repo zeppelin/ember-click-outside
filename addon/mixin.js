@@ -1,3 +1,4 @@
+/* eslint-disable ember/no-new-mixins */
 import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
 import { get } from '@ember/object';
@@ -10,6 +11,7 @@ const bound = function(fnName) {
     if (fn) { // https://github.com/zeppelin/ember-click-outside/issues/1
       return fn.bind(this);
     }
+    return
   });
 };
 
