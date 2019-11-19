@@ -1,8 +1,10 @@
-import { setModifierManager } from '@ember/modifier';
+import { setModifierManager, capabilities } from '@ember/modifier';
 import { closest, documentOrBodyContains, ios } from './utils';
 
 export default setModifierManager(
   () => ({
+    capabilities: capabilities ? capabilities('3.13') : undefined,
+
     createModifier(factory, args) {
       return {
         element: null,
