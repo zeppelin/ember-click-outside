@@ -1,3 +1,7 @@
+## 1.2.1
+
+* Fix `implicit-modifier-manager-capabilities` deprecation. ([#58](https://github.com/zeppelin/ember-click-outside/pull/58)) by [@zeppelin](https://github.com/zeppelin)
+
 ## 1.2.0
 
 * Allow `eventType` to be specified. ([#51](https://github.com/zeppelin/ember-click-outside/pull/51)) by [@crowjonah](https://github.com/crowjonah)
