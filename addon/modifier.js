@@ -11,12 +11,13 @@ export default setModifierManager(
         eventHandler: null,
         action: null,
         eventType: null,
+        capture: null,
       };
     },
 
     installModifier(state, element, args) {
       let [action] = args.positional;
-      let { exceptSelector } = args.named;
+      let { exceptSelector, capture } = args.named;
       let { eventType = 'click' } = args.named;
 
       if (action) {
@@ -24,8 +25,9 @@ export default setModifierManager(
         state.element = element;
         state.eventType = eventType;
         state.eventHandler = createHandler(element, action, exceptSelector);
+        state.capture = capture;
 
-        document.addEventListener(eventType, state.eventHandler);
+        document.addEventListener(eventType, state.eventHandler, { capture });
       }
 
       if (ios()) {
@@ -35,25 +37,26 @@ export default setModifierManager(
 
     updateModifier(state, args) {
       let [action] = args.positional;
-      let { exceptSelector } = args.named;
+      let { exceptSelector, capture } = args.named;
       let { eventType = 'click' } = args.named;
 
       if (state.action) {
-        document.removeEventListener('click', state.eventHandler);
+        document.removeEventListener('click', state.eventHandler, { capture: state.capture });
       }
 
       if (action) {
         state.action = action;
         state.eventType = eventType;
         state.eventHandler = createHandler(state.element, action, exceptSelector);
+        state.capture = capture;
 
-        document.addEventListener(eventType, state.eventHandler);
+        document.addEventListener(eventType, state.eventHandler, { capture });
       }
     },
 
     destroyModifier(state, element) {
       if (state.action) {
-        document.removeEventListener(state.eventType, state.eventHandler);
+        document.removeEventListener(state.eventType, state.eventHandler, { capture: state.capture });
       }
 
       if (ios()) {
