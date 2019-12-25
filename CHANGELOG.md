@@ -1,3 +1,8 @@
+## 1.3.0
+
+* Add `capture` option to the `on-click-outside` modifier ([#71](https://github.com/zeppelin/ember-click-outside/pull/71)) by [@Turbo87](https://github.com/Turbo87)
+* Bump js-yaml from 3.8.3 to 3.13.1 ([#57](https://github.com/zeppelin/ember-click-outside/pull/57)) by [@zeppelin](https://github.com/zeppelin)
+
 ## 1.2.1
 
 * Fix `implicit-modifier-manager-capabilities` deprecation. ([#58](https://github.com/zeppelin/ember-click-outside/pull/58)) by [@zeppelin](https://github.com/zeppelin)
