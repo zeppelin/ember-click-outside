@@ -1,7 +1,7 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { render, click, triggerEvent } from '@ember/test-helpers';
+import { render, click, triggerEvent, find, waitFor, waitUntil } from '@ember/test-helpers';
 
 module('modifier', 'Integration | Modifier | on-click-outside', function(hooks) {
   setupRenderingTest(hooks);
@@ -134,5 +134,39 @@ module('modifier', 'Integration | Modifier | on-click-outside', function(hooks) 
     `);
 
     await triggerEvent('.outside', 'mousedown');
+  });
+
+  // https://github.com/zeppelin/ember-click-outside/issues/98
+  test('event order (#98)', async function(assert) {
+    assert.expect(2);
+
+    this.set('isOpened', false);
+    this.set('toggleIsOpened', ()=> {
+      this.set('isOpened', !this.get('isOpened'));
+    });
+
+    await render(hbs`
+      <button
+        {{on "click" (fn this.toggleIsOpened)}}
+        class="toggler"
+        type="button"
+      >
+        Toggle isOpened
+      </button>
+
+      {{#if this.isOpened}}
+        <div {{on-click-outside (fn (mut this.isOpened) false)}} class="popover">Yay</div>
+      {{/if}}
+    `);
+
+    await click('.toggler');
+    await waitFor('.popover');
+
+    assert.ok(find('.popover'), 'The popover is visible');
+
+    await click('.toggler');
+    await waitUntil(() => !find('.popover'));
+
+    assert.ok(!find('.popover'), 'The popover is hidden');
   });
 });

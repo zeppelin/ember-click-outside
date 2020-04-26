@@ -1,9 +1,13 @@
 import { setModifierManager, capabilities } from '@ember/modifier';
 import { closest, documentOrBodyContains, ios } from './utils';
+import { next, cancel } from '@ember/runloop';
 
 export default setModifierManager(
   () => ({
     capabilities: capabilities ? capabilities('3.13') : undefined,
+
+    state: null,
+    _cancelOutsideListenerSetup: null,
 
     createModifier(factory, args) {
       return {
@@ -16,6 +20,8 @@ export default setModifierManager(
     },
 
     installModifier(state, element, args) {
+      this.state = state;
+
       let [action] = args.positional;
       let { exceptSelector, capture } = args.named;
       let { eventType = 'click' } = args.named;
@@ -27,7 +33,7 @@ export default setModifierManager(
         state.eventHandler = createHandler(element, action, exceptSelector);
         state.capture = capture;
 
-        document.addEventListener(eventType, state.eventHandler, { capture });
+        this._cancelOutsideListenerSetup = next(this, this.addClickOutsideListener);
       }
 
       if (ios()) {
@@ -36,12 +42,15 @@ export default setModifierManager(
     },
 
     updateModifier(state, args) {
+      this.state = state;
+
       let [action] = args.positional;
       let { exceptSelector, capture } = args.named;
       let { eventType = 'click' } = args.named;
 
       if (state.action) {
-        document.removeEventListener('click', state.eventHandler, { capture: state.capture });
+        cancel(this._cancelOutsideListenerSetup);
+        this.removeClickOutsideListener();
       }
 
       if (action) {
@@ -50,18 +59,35 @@ export default setModifierManager(
         state.eventHandler = createHandler(state.element, action, exceptSelector);
         state.capture = capture;
 
-        document.addEventListener(eventType, state.eventHandler, { capture });
+        next(this, this.addClickOutsideListener);
       }
     },
 
     destroyModifier(state, element) {
+      this.state = state;
+
       if (state.action) {
-        document.removeEventListener(state.eventType, state.eventHandler, { capture: state.capture });
+        cancel(this._cancelOutsideListenerSetup);
+        this.removeClickOutsideListener();
       }
 
       if (ios()) {
         document.body.style.cursor = '';
       }
+    },
+
+    addClickOutsideListener() {
+      let eventType = this.state.eventType || 'click';
+      let { capture, eventHandler } = this.state;
+
+      document.addEventListener(eventType, eventHandler, { capture });
+    },
+
+    removeClickOutsideListener() {
+      let eventType = this.state.eventType || 'click';
+      let { capture, eventHandler } = this.state;
+
+      document.removeEventListener(eventType, eventHandler, { capture });
     }
   }),
   class OnClickOutsideModifier {}
