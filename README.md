@@ -125,3 +125,33 @@ export default Component.extend(ClickOutsideMixin, {
 For every click in the document, `ember-click-outside` will check if the click target is outside of its component, and trigger the provided action/callback if so.
 
 If the click target cannot be found in the document (probably because it has been deleted before `ember-click-outside` detected the click), no action/callback is triggered, since we cannot check if it is inside or outside of the component.
+
+
+## Testing
+
+Since the modifier and the component schedule the event setup to the next run
+loop, the ususal `await click('.outside-element')` will not wait enough to have
+them available, so even though the modifier or component is rendered, it's not
+yet ready to respond to events. To circumwent this, the addon includes a simple
+util to handle this: the `clickOutside()` function.
+
+Under the hood, it only waits for the next run loop to give control back - it's
+just more convenient then remembering how the addon works internally.
+
+```ts
+function clickOutside(target?: string | HTMLElement): Promise<void>;
+```
+
+The `target` parameter is optional, provide ony only if you want to click
+outside to a specific element - just make sure it's outside. By default the
+event is fired on the `body`.
+
+**Usage:**
+
+```ts
+await clickOutside(); // fired on the `body` element
+
+// or
+
+await clickOutside('.some-selector'); // fired on `.some-selector`
+```

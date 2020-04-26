@@ -1,7 +1,8 @@
 import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { render, click, triggerEvent, find, waitFor, waitUntil } from '@ember/test-helpers';
+import { render, click, triggerEvent, find } from '@ember/test-helpers';
+import { clickOutside } from 'ember-click-outside/test-support/click-outside';
 
 module('modifier', 'Integration | Modifier | on-click-outside', function(hooks) {
   setupRenderingTest(hooks);
@@ -160,12 +161,10 @@ module('modifier', 'Integration | Modifier | on-click-outside', function(hooks) 
     `);
 
     await click('.toggler');
-    await waitFor('.popover');
 
     assert.ok(find('.popover'), 'The popover is visible');
 
-    await click('.toggler');
-    await waitUntil(() => !find('.popover'));
+    await clickOutside('.toggler');
 
     assert.ok(!find('.popover'), 'The popover is hidden');
   });

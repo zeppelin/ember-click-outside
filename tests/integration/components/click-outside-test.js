@@ -3,6 +3,7 @@ import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { next } from '@ember/runloop';
 import { render, click, triggerEvent } from '@ember/test-helpers';
+import { clickOutside } from 'ember-click-outside/test-support/click-outside';
 
 module('component', 'Integration | Component | click outside', function(hooks) {
   setupRenderingTest(hooks);
@@ -23,16 +24,8 @@ module('component', 'Integration | Component | click outside', function(hooks) {
       {{/click-outside}}
     `);
 
-    // It's important to fire the actions in the next run loop. Failing to do so
-    // would make the outside click not to fire. The reason for this is more
-    // often than not the component is rendered as a result of some user
-    // interaction, mainly a click. If the component attached the outside click
-    // event handler in the same loop, the handler would catch the event and send
-    // the action immediately.
-    await next(async ()=> {
-      await click('.inside');
-      await click('.outside');
-    });
+    await click('.inside');
+    await click('.outside');
   });
 
   test('real-world scenario', async function(assert) {
@@ -69,14 +62,12 @@ module('component', 'Integration | Component | click outside', function(hooks) {
     assert.expect(0);
 
     await render(hbs`
-      <div class="outside">Somewhere, over the rainbow...</div>
-
       {{#click-outside}}
         <div class="inside">We're in</div>
       {{/click-outside}}
     `);
 
-    await click('.outside');
+    await clickOutside();
   });
 
   test('except selector', async function(assert) {
@@ -190,9 +181,7 @@ module('component', 'Integration | Component | click outside', function(hooks) {
       {{/click-outside}}
     `);
 
-    await next(async () => {
-      await click('.outside');
-    });
+    await clickOutside('.outside');
   });
 
   test('`action` handler is still valid', async function(assert) {
@@ -203,17 +192,13 @@ module('component', 'Integration | Component | click outside', function(hooks) {
     });
 
     await render(hbs`
-      <div class="outside">Somewhere, over the rainbow...</div>
-
       {{#click-outside action=(action onClickOutside)}}
         <div class="inside">We're in</div>
       {{/click-outside}}
     `);
 
-    await next(async ()=> {
-      await click('.inside');
-      await click('.outside');
-    });
+    await click('.inside');
+    await clickOutside();
 
     assert.expectDeprecation();
   });
