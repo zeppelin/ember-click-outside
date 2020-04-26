@@ -1,3 +1,7 @@
+## 2.0.0-beta.0
+
+Actually, `v1.4.0-beta.0` was meant to be `v2.0.0-beta.0`, so no changes now, only a major version bump...
+
 ## 1.4.0-beta.0
 
 * BREAKING: Fix modifier behavior ([#113](https://github.com/zeppelin/ember-click-outside/pull/113)) by [@zeppelin](https://github.com/zeppelin)
