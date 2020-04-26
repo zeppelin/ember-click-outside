@@ -1,3 +1,8 @@
+## 1.4.0-beta.0
+
+* BREAKING: Fix modifier behavior ([#113](https://github.com/zeppelin/ember-click-outside/pull/113)) by [@zeppelin](https://github.com/zeppelin)
+* BREAKING: Drop Node 8 support ([#112](https://github.com/zeppelin/ember-click-outside/pull/113)) by [@zeppelin](https://github.com/zeppelin)
+
 ## 1.3.0
 
 * Add `capture` option to the `on-click-outside` modifier ([#71](https://github.com/zeppelin/ember-click-outside/pull/71)) by [@Turbo87](https://github.com/Turbo87)
