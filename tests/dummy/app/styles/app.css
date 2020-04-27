@@ -1,9 +1,11 @@
-html, body, body > .ember-view {
+html, body {
   height: 100%;
   padding: 0;
   margin: 0
 }
-body > .ember-view {
+
+.wrapper {
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

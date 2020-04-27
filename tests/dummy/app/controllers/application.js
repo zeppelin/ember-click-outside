@@ -1,9 +1,9 @@
 import Controller from '@ember/controller';
+import { action } from '@ember/object';
 
-export default Controller.extend({
-  actions: {
-    alert() {
-      alert('Click outside detected!');
-    }
+export default class ApplicationController extends Controller {
+  @action
+  alert() {
+    alert('Click outside detected!');
   }
-});
+}
