@@ -1,3 +1,8 @@
+## 2.0.0-beta.1
+
+* Fix multiple modifier instances ([#116](https://github.com/zeppelin/ember-click-outside/pull/116)) by [@zeppelin](https://github.com/zeppelin)
+* Run ember-cli-update ([#114](https://github.com/zeppelin/ember-click-outside/pull/114)) by [@zeppelin](https://github.com/zeppelin)
+
 ## 2.0.0-beta.0
 
 Actually, `v1.4.0-beta.0` was meant to be `v2.0.0-beta.0`, so no changes now, only a major version bump...
