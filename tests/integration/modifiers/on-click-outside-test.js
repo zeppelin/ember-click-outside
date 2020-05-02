@@ -169,4 +169,23 @@ module('modifier', 'Integration | Modifier | on-click-outside', function(hooks) 
 
     assert.ok(!find('.popover'), 'The popover is hidden');
   });
+
+  // https://github.com/zeppelin/ember-click-outside/issues/115
+  test('multiple instances (#115)', async function(assert) {
+    assert.expect(3);
+
+    this.set('items', [1, 2, 3]);
+    this.set('itemActionHandler', (which)=> {
+      assert.ok(true, 'The handler was called');
+    });
+
+    await render(hbs`
+      <div class="x"></div>
+      {{#each this.items as |i|}}
+        <Item @act={{fn this.itemActionHandler i}} />
+      {{/each}}
+    `);
+
+    await click('.x');
+  });
 });
