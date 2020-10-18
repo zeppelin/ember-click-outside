@@ -1,3 +1,7 @@
+## 2.0.0
+
+* Upgrade ember-modifier to 2.1.0 ([#167](https://github.com/zeppelin/ember-click-outside/pull/167)) by [@lukemelia](https://github.com/lukemelia)
+
 ## 2.0.0-beta.1
 
 * Fix multiple modifier instances ([#116](https://github.com/zeppelin/ember-click-outside/pull/116)) by [@zeppelin](https://github.com/zeppelin)
