@@ -1,7 +1,7 @@
 {
   "name": "ember-click-outside",
   "version": "2.0.0",
-  "description": "A component and mixin for detecting clicks happened outside the element.",
+  "description": "A set of tools for detecting click events fired outside an element.",
   "keywords": [
     "ember-addon"
   ],
