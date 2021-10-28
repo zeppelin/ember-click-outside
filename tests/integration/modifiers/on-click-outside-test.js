@@ -39,6 +39,7 @@ module(
     });
 
     test('real-world scenario', async function (assert) {
+      assert.expect(1);
       this.isOpened = false;
 
       this.open = () => {
