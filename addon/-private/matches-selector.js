@@ -1,12 +1,13 @@
 // https://github.com/zeppelin/ember-click-outside/issues/23
 
 const proto = typeof Element !== 'undefined' ? Element.prototype : {};
-const vendor = proto.matches
-  || proto.matchesSelector
-  || proto.webkitMatchesSelector
-  || proto.mozMatchesSelector
-  || proto.msMatchesSelector
-  || proto.oMatchesSelector;
+const vendor =
+  proto.matches ||
+  proto.matchesSelector ||
+  proto.webkitMatchesSelector ||
+  proto.mozMatchesSelector ||
+  proto.msMatchesSelector ||
+  proto.oMatchesSelector;
 
 export function matches(el, selector) {
   if (!el || el.nodeType !== 1) return false;

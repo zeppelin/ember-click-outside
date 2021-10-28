@@ -8,12 +8,12 @@ import { deprecatingAlias } from '@ember/object/computed';
 export default Component.extend(ClickOutsideMixin, {
   'except-selector': deprecatingAlias('exceptSelector', {
     id: 'ember-click-outside.kebab-cased-props',
-    until: '2.0.0'
+    until: '2.0.0',
   }),
 
   action: deprecatingAlias('onClickOutside', {
     id: 'ember-click-outside.action-prop',
-    until: '2.0.0'
+    until: '2.0.0',
   }),
 
   clickOutside(e) {
@@ -21,12 +21,12 @@ export default Component.extend(ClickOutsideMixin, {
       return;
     }
 
-    const exceptSelector = get(this, 'exceptSelector');
+    const exceptSelector = this.exceptSelector;
     if (exceptSelector && closest(e.target, exceptSelector)) {
       return;
     }
 
-    let onClickOutside = get(this, 'onClickOutside');
+    let onClickOutside = this.onClickOutside;
     if (typeof onClickOutside === 'function') {
       onClickOutside(e);
     }
@@ -38,7 +38,8 @@ export default Component.extend(ClickOutsideMixin, {
   },
 
   willDestroyElement() {
+    this._super(...arguments);
     cancel(this._cancelOutsideListenerSetup);
     this.removeClickOutsideListener();
-  }
+  },
 });

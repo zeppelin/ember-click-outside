@@ -5,13 +5,14 @@ import { get } from '@ember/object';
 
 import { documentOrBodyContains, ios } from './utils';
 
-const bound = function(fnName) {
-  return computed(fnName, function() {
+const bound = function (fnName) {
+  return computed(fnName, function () {
     let fn = get(this, fnName);
-    if (fn) { // https://github.com/zeppelin/ember-click-outside/issues/1
+    if (fn) {
+      // https://github.com/zeppelin/ember-click-outside/issues/1
       return fn.bind(this);
     }
-    return
+    return;
   });
 };
 
@@ -40,7 +41,7 @@ export default Mixin.create({
   },
 
   outsideClickHandler(e) {
-    const element = get(this, 'element');
+    const element = this.element;
     const path = e.path || (e.composedPath && e.composedPath());
 
     if (path) {
@@ -61,13 +62,13 @@ export default Mixin.create({
 
   addClickOutsideListener() {
     const eventType = this.eventType || 'click';
-    const clickHandler = get(this, 'clickHandler');
+    const clickHandler = this.clickHandler;
     document.addEventListener(eventType, clickHandler);
   },
 
   removeClickOutsideListener() {
     const eventType = this.eventType || 'click';
-    const clickHandler = get(this, 'clickHandler');
+    const clickHandler = this.clickHandler;
     document.removeEventListener(eventType, clickHandler);
-  }
+  },
 });
