@@ -2,7 +2,7 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { next } from '@ember/runloop';
-import { render, click, triggerEvent } from '@ember/test-helpers';
+import { render, click, settled, triggerEvent } from '@ember/test-helpers';
 
 module(
   'component',
@@ -40,9 +40,11 @@ module(
         await click('.inside');
         await click('.outside');
       });
+      await settled();
     });
 
     test('real-world scenario', async function (assert) {
+      assert.expect(1);
       this.isOpened = false;
 
       this.open = () => {
@@ -114,6 +116,7 @@ module(
         await click('.outside');
         await click('.except-outside');
       });
+      await settled();
     });
 
     test('deprecated `except-selector` still works', async function (assert) {
@@ -144,6 +147,7 @@ module(
         await click('.outside');
         await click('.except-outside');
       });
+      await settled();
 
       assert.expectDeprecation();
     });
@@ -173,6 +177,7 @@ module(
       await next(async () => {
         await triggerEvent('.outside', 'mousedown');
       });
+      await settled();
     });
 
     test('handle removed DOM element outside', async function (assert) {
@@ -200,6 +205,7 @@ module(
       await next(async () => {
         await click('.outside');
       });
+      await settled();
     });
 
     test('`action` handler is still valid', async function (assert) {
@@ -221,6 +227,7 @@ module(
         await click('.inside');
         await click('.outside');
       });
+      await settled();
 
       assert.expectDeprecation();
     });
