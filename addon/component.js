@@ -1,8 +1,11 @@
+/* eslint-disable ember/no-component-lifecycle-hooks */
+/* eslint-disable ember/require-tagless-components */
+/* eslint-disable ember/no-classic-classes */
+/* eslint-disable ember/no-classic-components */
 import ClickOutsideMixin from './mixin';
 import Component from '@ember/component';
 import { next, cancel } from '@ember/runloop';
 import { closest } from './utils';
-import { get } from '@ember/object';
 import { deprecatingAlias } from '@ember/object/computed';
 
 export default Component.extend(ClickOutsideMixin, {
