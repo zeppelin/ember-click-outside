@@ -24,7 +24,7 @@ jobs:
           node-version: 12.x
           cache: npm
       - name: Install Dependencies
-        run: npm ci
+        run: npm install --no-shrinkwrap
       - name: Lint
         run: npm run lint
       - name: Run Tests
@@ -72,6 +72,6 @@ jobs:
           node-version: 12.x
           cache: npm
       - name: Install Dependencies
-        run: npm ci
+        run: npm install --no-shrinkwrap
       - name: Run Tests
         run: ./node_modules/.bin/ember try:one ${{ matrix.try-scenario }}
