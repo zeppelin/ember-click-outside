@@ -6,8 +6,11 @@ A set of tools for detecting click events fired outside an element.
 
 ## Installation
 
-From within your ember-cli project directory install the addon:
+* Ember.js v3.20 or above
+* Ember CLI v3.20 or above
+* Node.js v12 or above
 
+From within your ember-cli project directory install the addon:
 ```bash
 ember install ember-click-outside
 ```

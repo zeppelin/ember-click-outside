@@ -22,7 +22,7 @@ export const documentOrBodyContains = (element) => {
   } else {
     return document.body.contains(element);
   }
-}
+};
 
 export const ios = () => {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
