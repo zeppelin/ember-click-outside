@@ -1,3 +1,8 @@
+## 3.0.0
+
+* Update ember cli 3.28 ([#230](https://github.com/zeppelin/ember-click-outside/pull/230)) by [@jrjohnson](https://github.com/jrjohnson)
+* Widen dependency range for ember-modifier ([#233](https://github.com/zeppelin/ember-click-outside/pull/233)) by [@zeppelin](https://github.com/zeppelin)
+
 ## 2.0.0
 
 * Upgrade ember-modifier to 2.1.0 ([#167](https://github.com/zeppelin/ember-click-outside/pull/167)) by [@lukemelia](https://github.com/lukemelia)
