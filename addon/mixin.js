@@ -2,6 +2,7 @@
 import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
 import { get } from '@ember/object';
+import { deprecate } from '@ember/debug';
 
 import { documentOrBodyContains, ios } from './utils';
 
@@ -17,6 +18,21 @@ const bound = function (fnName) {
 };
 
 export default Mixin.create({
+  init(...args) {
+    this._super(...args);
+
+    deprecate(
+      'Using the ClickOutsideMixin is deprecated and will be removed. Please consider migrating to the `{{click-outside}}` modifier',
+      false,
+      {
+        id: 'ember-click-outside.mixin',
+        since: '4.0.0',
+        until: '5.0.0',
+        for: 'ember-click-outside',
+      }
+    );
+  },
+
   clickOutside() {},
   clickHandler: bound('outsideClickHandler'),
 
