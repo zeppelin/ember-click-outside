@@ -1,3 +1,16 @@
+
+## v4.0.0 (2022-03-11)
+
+#### :boom: Breaking Change
+* [#240](https://github.com/zeppelin/ember-click-outside/pull/240) Remove deprecated component properties ([@zeppelin](https://github.com/zeppelin))
+* [#239](https://github.com/zeppelin/ember-click-outside/pull/239) Remove deprecated exports ([@zeppelin](https://github.com/zeppelin))
+
+#### :rocket: Enhancement
+* [#238](https://github.com/zeppelin/ember-click-outside/pull/238) Deprecate `ClickOutsideMixin` ([@zeppelin](https://github.com/zeppelin))
+
+#### Committers: 1
+- Gabor Babicz ([@zeppelin](https://github.com/zeppelin))
+
 ## 3.0.0
 
 * Update ember cli 3.28 ([#230](https://github.com/zeppelin/ember-click-outside/pull/230)) by [@jrjohnson](https://github.com/jrjohnson)
