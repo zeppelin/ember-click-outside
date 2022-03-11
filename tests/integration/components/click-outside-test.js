@@ -2,7 +2,13 @@ import { module, test } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { next } from '@ember/runloop';
-import { render, click, settled, triggerEvent } from '@ember/test-helpers';
+import {
+  getDeprecations,
+  render,
+  click,
+  settled,
+  triggerEvent,
+} from '@ember/test-helpers';
 
 module(
   'component',
@@ -25,7 +31,7 @@ module(
       await render(hbs`
       <div class="outside">Somewhere, over the rainbow...</div>
 
-      {{#click-outside onClickOutside=(action didClickOutside)}}
+      {{#click-outside onClickOutside=(action this.didClickOutside)}}
         <div class="inside">We're in</div>
       {{/click-outside}}
     `);
@@ -102,7 +108,7 @@ module(
         Somewhere, under the rainbow...
       </div>
 
-      {{#click-outside exceptSelector=".except-outside" onClickOutside=(action didClickOutside)}}
+      {{#click-outside exceptSelector=".except-outside" onClickOutside=(action this.didClickOutside)}}
       {{/click-outside}}
     `);
 
@@ -133,7 +139,7 @@ module(
         Somewhere, under the rainbow...
       </div>
 
-      {{#click-outside except-selector=".except-outside" onClickOutside=(action didClickOutside)}}
+      {{#click-outside except-selector=".except-outside" onClickOutside=(action this.didClickOutside)}}
       {{/click-outside}}
     `);
 
@@ -149,7 +155,14 @@ module(
       });
       await settled();
 
-      assert.expectDeprecation();
+      assert.ok(
+        getDeprecations().some(
+          (d) =>
+            d.message ===
+            'Usage of `except-selector` is deprecated, use `exceptSelector` instead.'
+        ),
+        'except-selector deprecation was raised'
+      );
     });
 
     test('event type', async function (assert) {
@@ -164,13 +177,13 @@ module(
       });
 
       await render(hbs`
-      {{#if topSide}}
+      {{#if this.topSide}}
         Blue
       {{else}}
         <div class="outside" {{action "toggleFlag"}}>Yellow</div>
       {{/if}}
 
-      {{#click-outside eventType='mousedown' onClickOutside=(action didClickOutside)}}
+      {{#click-outside eventType='mousedown' onClickOutside=(action this.didClickOutside)}}
       {{/click-outside}}
     `);
 
@@ -192,13 +205,13 @@ module(
       });
 
       await render(hbs`
-      {{#if topSide}}
+      {{#if this.topSide}}
         Blue
       {{else}}
         <div class="outside" {{action "toggleFlag"}}>Yellow</div>
       {{/if}}
 
-      {{#click-outside onClickOutside=(action didClickOutside)}}
+      {{#click-outside onClickOutside=(action this.didClickOutside)}}
       {{/click-outside}}
     `);
 
@@ -218,7 +231,7 @@ module(
       await render(hbs`
       <div class="outside">Somewhere, over the rainbow...</div>
 
-      {{#click-outside action=(action onClickOutside)}}
+      {{#click-outside action=(action this.onClickOutside)}}
         <div class="inside">We're in</div>
       {{/click-outside}}
     `);
@@ -229,7 +242,14 @@ module(
       });
       await settled();
 
-      assert.expectDeprecation();
+      assert.ok(
+        getDeprecations().some(
+          (d) =>
+            d.message ===
+            'Usage of `action` is deprecated, use `onClickOutside` instead.'
+        ),
+        'action deprecation was raised'
+      );
     });
   }
 );

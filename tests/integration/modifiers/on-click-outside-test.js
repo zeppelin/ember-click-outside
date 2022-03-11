@@ -31,7 +31,7 @@ module(
       await render(hbs`
       <div class="outside">Somewhere, over the rainbow...</div>
 
-      <div {{on-click-outside (action didClickOutside)}} class="inside">We're in</div>
+      <div {{on-click-outside (action this.didClickOutside)}} class="inside">We're in</div>
     `);
 
       await click('.inside');
@@ -96,7 +96,7 @@ module(
       </div>
 
       <div
-        {{on-click-outside (action didClickOutside)
+        {{on-click-outside (action this.didClickOutside)
           exceptSelector=".except-outside"
         }}
       ></div>
@@ -118,13 +118,13 @@ module(
       });
 
       await render(hbs`
-      {{#if topSide}}
+      {{#if this.topSide}}
         Blue
       {{else}}
         <div class="outside" {{action "toggleFlag"}}>Yellow</div>
       {{/if}}
 
-      <div {{on-click-outside (action didClickOutside)}}></div>
+      <div {{on-click-outside (action this.didClickOutside)}}></div>
     `);
 
       await click('.outside');
@@ -141,7 +141,7 @@ module(
       <div class="outside">Somewhere, over the rainbow...</div>
 
       <div
-        {{on-click-outside (action didClickOutside)
+        {{on-click-outside (action this.didClickOutside)
           eventType="mousedown"
         }}
       ></div>
@@ -196,7 +196,7 @@ module(
       await render(hbs`
       <div class="x"></div>
       {{#each this.items as |i|}}
-        <Item @act={{fn this.itemActionHandler i}} />
+        <div {{on-click-outside (fn this.itemActionHandler i)}}>...</div>
       {{/each}}
     `);
 
