@@ -1,9 +1,11 @@
 import { next, cancel } from '@ember/runloop';
+import { registerDestructor } from '@ember/destroyable';
 import Modifier from 'ember-modifier';
 
 import { closest, documentOrBodyContains, ios } from './utils';
 
 export default class ClickOutsideModifier extends Modifier {
+  didSetup = false;
   action = null;
   capture = null;
   eventHandler = null;
@@ -12,31 +14,39 @@ export default class ClickOutsideModifier extends Modifier {
 
   cancelOutsideListenerSetup = null;
 
-  didInstall() {
-    this._init();
+  constructor() {
+    super(...arguments);
+    registerDestructor(this, this.cleanup);
+  }
 
-    if (ios()) {
-      document.body.style.cursor = 'pointer';
+  modify(element, [action], { capture, eventType, exceptSelector }) {
+    if (!this.didSetup) {
+      if (ios()) {
+        document.body.style.cursor = 'pointer';
+      }
+
+      this.didSetup = true;
+    } else {
+      this._destroy();
     }
+    this._init({
+      element,
+      action,
+      capture,
+      eventType,
+      exceptSelector,
+    });
   }
 
-  didUpdateArguments() {
-    this._destroy();
-    this._init();
-  }
-
-  willRemove() {
+  cleanup = () => {
     this._destroy();
 
     if (ios()) {
       document.body.style.cursor = '';
     }
-  }
+  };
 
-  _init() {
-    let [action] = this.args.positional;
-    let { capture, eventType, exceptSelector } = this.args.named;
-
+  _init({ element, action, capture, eventType, exceptSelector }) {
     if (!action) {
       return;
     }
@@ -50,7 +60,7 @@ export default class ClickOutsideModifier extends Modifier {
     }
 
     this.eventHandler = this._createHandler(
-      this.element,
+      element,
       this.action,
       this.exceptSelector
     );
