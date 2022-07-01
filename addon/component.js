@@ -8,6 +8,7 @@ import { closest } from './utils';
 import { computed } from '@ember/object';
 import { get } from '@ember/object';
 import { documentOrBodyContains, ios } from './utils';
+import { deprecate } from '@ember/debug';
 
 const bound = function (fnName) {
   return computed(fnName, function () {
@@ -21,6 +22,21 @@ const bound = function (fnName) {
 };
 
 export default Component.extend({
+  init(...args) {
+    this._super(...args);
+
+    deprecate(
+      'Using the <ClickOutside> component is deprecated and will be removed. Please consider migrating to the `{{click-outside}}` modifier',
+      false,
+      {
+        id: 'ember-click-outside.component',
+        since: '5.0.0',
+        until: '6.0.0',
+        for: 'ember-click-outside',
+      }
+    );
+  },
+
   clickHandler: bound('outsideClickHandler'),
 
   outsideClickHandler(e) {
