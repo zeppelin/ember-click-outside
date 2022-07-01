@@ -3,12 +3,30 @@ import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { next } from '@ember/runloop';
 import { render, click, settled, triggerEvent } from '@ember/test-helpers';
+import { getDeprecations } from '@ember/test-helpers';
 
 module(
   'component',
   'Integration | Component | click outside',
   function (hooks) {
     setupRenderingTest(hooks);
+
+    test('raises deprecation warning', async function (assert) {
+      this.set('noop', () => {});
+
+      await render(hbs`
+        <ClickOutside @onClickOutside={{this.noop}}></ClickOutside>
+      `);
+
+      assert.ok(
+        getDeprecations().some(
+          (d) =>
+            d.message ===
+            'Using the <ClickOutside> component is deprecated and will be removed. Please consider migrating to the `{{click-outside}}` modifier'
+        ),
+        '<ClickOutside> component deprecation was raised'
+      );
+    });
 
     test('smoke test', async function (assert) {
       assert.expect(2);

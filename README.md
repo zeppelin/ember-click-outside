@@ -17,50 +17,30 @@ ember install ember-click-outside
 
 ## Usage
 
-### As element modifier (recommended)
-
 ```hbs
-<div {{on-click-outside (action "someAction")}}>
+<div {{on-click-outside this.someAction}}>
   Your HTML...
 </div>
 ```
 
 *If you're running ember-source <3.8, you need install [ember-modifier-manager-polyfill](https://github.com/rwjblue/ember-modifier-manager-polyfill) to get the modifier working.*
 
-### As a component
-
-```hbs
-<ClickOutside @onClickOutside={{action "someAction"}}>
-  Your HTML...
-</ClickOutside>
-```
-
-```js
-  ...
-  actions: {
-    // Called on click outside
-    someAction(e /* click event object */) {
-
-    },
-  },
-  ...
-```
 
 If you wish to exclude certain elements from counting as outside clicks, use
 the `exceptSelector` attribute:
 
 ```hbs
-<ClickOutside @onClickOutside={{action "someAction"}} @exceptSelector=".some-selector">
+<div {{click-outside onClickOutside=this.someAction exceptSelector=".some-selector"}}>
   Your HTML...
-</ClickOutside>
+</div>
 ```
 
 You can listen for events other than `click` by using the `eventType` attribute:
 
 ```hbs
-<ClickOutside @onClickOutside={{action "someAction"}} @eventType="mousedown">
+<div {{click-outside onClickOutside=this.someAction eventType="mousedown"}}>
   Your HTML...
-</ClickOutside>
+</div>
 ```
 
 ## Behavior
