@@ -63,66 +63,6 @@ You can listen for events other than `click` by using the `eventType` attribute:
 </ClickOutside>
 ```
 
-### As a mixin
-
-This is somewhat more advanced, but if that's fine, feel free:
-
-<details>
-<summary>Using ember-click-outside component mixin</summary>
-
-Here is a simplified version of the implementation of the component above:
-
-```js
-import Component from '@ember/component';
-import { on } from '@ember/object/evented';
-import { next } from '@ember/runloop';
-import ClickOutsideMixin from 'ember-click-outside/mixin';
-
-export default Component.extend(ClickOutsideMixin, {
-  clickOutside(e) {
-    this.get('onClickOutside')(e);
-  },
-
-  _attachClickOutsideHandler: on('didInsertElement', function() {
-    next(this, this.addClickOutsideListener);
-  }),
-
-  _removeClickOutsideHandler: on('willDestroyElement', function() {
-    this.removeClickOutsideListener();
-  })
-});
-```
-
-**Note:** You should almost always call `this.addClickOutsideListener` inside
-the next run loop when you want to set it up on `didInsertElement`. The reason
-for this is more often than not the component is rendered as a result of some
-user interaction, usually a click. If the component attached the outside click
-event handler in the same loop, the handler would catch the event and fire the
-callback immediately.
-
-**Note:** If you need to override the `didInsertElement` and/or
-`willDestroyElement` lifecycle hooks, you must make sure to call
-`this._super(...arguments)` in them because the mixin implements them as well.
-
-```js
-export default Component.extend(ClickOutsideMixin, {
-  didInsertElement() {
-    this._super(...arguments);
-
-    // Something else you may want to run when the
-    // element in inserted in the DOM
-  },
-
-  willDestroyElement() {
-    this._super(...arguments);
-
-    // Something else you may want to run when the
-    // element in removed from the DOM
-  }
-});
-```
-</details>
-
 ## Behavior
 
 For every click in the document, `ember-click-outside` will check if the click target is outside of its component, and trigger the provided action/callback if so.
