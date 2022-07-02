@@ -29,10 +29,9 @@ module(
       });
 
       await render(hbs`
-      <div class="outside">Somewhere, over the rainbow...</div>
-
-      <div {{on-click-outside (action this.didClickOutside)}} class="inside">We're in</div>
-    `);
+        <div class="outside">Somewhere, over the rainbow...</div>
+        <div {{on-click-outside this.didClickOutside}} class="inside">We're in</div>
+      `);
 
       await click('.inside');
       await click('.outside');
@@ -52,18 +51,18 @@ module(
       };
 
       await render(hbs`
-      <button data-test-open onclick={{action this.open}}>
-        Toggle popover
-      </button>
+        <button data-test-open {{on "click" this.open}}>
+          Toggle popover
+        </button>
 
-      <div data-test-outside>Outside</div>
+        <div data-test-outside>Outside</div>
 
-      {{#if this.isOpened}}
-        <div {{on-click-outside (action this.close)}}>
-          Popover is opened.
-        </div>
-      {{/if}}
-    `);
+        {{#if this.isOpened}}
+          <div {{on-click-outside this.close}}>
+            Popover is opened.
+          </div>
+        {{/if}}
+      `);
 
       await click('[data-test-open]');
       await click('[data-test-outside]');
@@ -73,10 +72,9 @@ module(
       assert.expect(0);
 
       await render(hbs`
-      <div class="outside">Somewhere, over the rainbow...</div>
-
-      <div {{on-click-outside}} class="inside">We're in</div>
-    `);
+        <div class="outside">Somewhere, over the rainbow...</div>
+        <div {{on-click-outside}} class="inside">We're in</div>
+      `);
 
       await click('.outside');
     });
@@ -89,18 +87,16 @@ module(
       });
 
       await render(hbs`
-      <div class="outside">Somewhere, over the rainbow...</div>
+        <div class="outside">Somewhere, over the rainbow...</div>
 
-      <div class="except-outside">
-        Somewhere, under the rainbow...
-      </div>
+        <div class="except-outside">
+          Somewhere, under the rainbow...
+        </div>
 
-      <div
-        {{on-click-outside (action this.didClickOutside)
-          exceptSelector=".except-outside"
-        }}
-      ></div>
-    `);
+        <div
+          {{on-click-outside this.didClickOutside exceptSelector=".except-outside"}}
+        ></div>
+      `);
 
       await click('.outside');
       await click('.except-outside');
@@ -118,14 +114,14 @@ module(
       });
 
       await render(hbs`
-      {{#if this.topSide}}
-        Blue
-      {{else}}
-        <div class="outside" {{action "toggleFlag"}}>Yellow</div>
-      {{/if}}
+        {{#if this.topSide}}
+          Blue
+        {{else}}
+          <div class="outside" {{action "toggleFlag"}}>Yellow</div>
+        {{/if}}
 
-      <div {{on-click-outside (action this.didClickOutside)}}></div>
-    `);
+        <div {{on-click-outside this.didClickOutside}}></div>
+      `);
 
       await click('.outside');
     });
@@ -138,14 +134,9 @@ module(
       });
 
       await render(hbs`
-      <div class="outside">Somewhere, over the rainbow...</div>
-
-      <div
-        {{on-click-outside (action this.didClickOutside)
-          eventType="mousedown"
-        }}
-      ></div>
-    `);
+        <div class="outside">Somewhere, over the rainbow...</div>
+        <div {{on-click-outside this.didClickOutside eventType="mousedown"}}></div>
+      `);
 
       await triggerEvent('.outside', 'mousedown');
     });
@@ -160,18 +151,18 @@ module(
       });
 
       await render(hbs`
-      <button
-        {{on "click" (fn this.toggleIsOpened)}}
-        class="toggler"
-        type="button"
-      >
-        Toggle isOpened
-      </button>
+        <button
+          {{on "click" (fn this.toggleIsOpened)}}
+          class="toggler"
+          type="button"
+        >
+          Toggle isOpened
+        </button>
 
-      {{#if this.isOpened}}
-        <div {{on-click-outside (fn (mut this.isOpened) false)}} class="popover">Yay</div>
-      {{/if}}
-    `);
+        {{#if this.isOpened}}
+          <div {{on-click-outside (fn (mut this.isOpened) false)}} class="popover">Yay</div>
+        {{/if}}
+      `);
 
       await click('.toggler');
       await waitFor('.popover');
@@ -194,11 +185,11 @@ module(
       });
 
       await render(hbs`
-      <div class="x"></div>
-      {{#each this.items as |i|}}
-        <div {{on-click-outside (fn this.itemActionHandler i)}}>...</div>
-      {{/each}}
-    `);
+        <div class="x"></div>
+        {{#each this.items as |i|}}
+          <div {{on-click-outside (fn this.itemActionHandler i)}}>...</div>
+        {{/each}}
+      `);
 
       await click('.x');
     });

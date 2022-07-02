@@ -1,9 +1,12 @@
-import { module, test } from 'qunit';
+import {
+  click,
+  getDeprecations,
+  render,
+  triggerEvent,
+} from '@ember/test-helpers';
 import { setupRenderingTest } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { next } from '@ember/runloop';
-import { render, click, settled, triggerEvent } from '@ember/test-helpers';
-import { getDeprecations } from '@ember/test-helpers';
+import { module, test } from 'qunit';
 
 module(
   'component',
@@ -41,24 +44,15 @@ module(
       });
 
       await render(hbs`
-      <div class="outside">Somewhere, over the rainbow...</div>
+        <div class="outside">Somewhere, over the rainbow...</div>
 
-      {{#click-outside onClickOutside=(action this.didClickOutside)}}
-        <div class="inside">We're in</div>
-      {{/click-outside}}
-    `);
+        <ClickOutside @onClickOutside={{this.didClickOutside}}>
+          <div class="inside">We're in</div>
+        </ClickOutside>
+      `);
 
-      // It's important to fire the actions in the next run loop. Failing to do so
-      // would make the outside click not to fire. The reason for this is more
-      // often than not the component is rendered as a result of some user
-      // interaction, mainly a click. If the component attached the outside click
-      // event handler in the same loop, the handler would catch the event and send
-      // the action immediately.
-      await next(async () => {
-        await click('.inside');
-        await click('.outside');
-      });
-      await settled();
+      await click('.inside');
+      await click('.outside');
     });
 
     test('real-world scenario', async function (assert) {
@@ -75,18 +69,18 @@ module(
       };
 
       await render(hbs`
-      <button data-test-open onclick={{action this.open}}>
-        Toggle popover
-      </button>
+        <button data-test-open {{on "click" this.open}}>
+          Toggle popover
+        </button>
 
-      <div data-test-outside>Outside</div>
+        <div data-test-outside>Outside</div>
 
-      {{#if this.isOpened}}
-        {{#click-outside onClickOutside=(action this.close)}}
-          Popover is opened.
-        {{/click-outside}}
-      {{/if}}
-    `);
+        {{#if this.isOpened}}
+          <ClickOutside @onClickOutside={{this.close}}>
+            Popover is opened.
+          </ClickOutside>
+        {{/if}}
+      `);
 
       await click('[data-test-open]');
       await click('[data-test-outside]');
@@ -96,12 +90,12 @@ module(
       assert.expect(0);
 
       await render(hbs`
-      <div class="outside">Somewhere, over the rainbow...</div>
+        <div class="outside">Somewhere, over the rainbow...</div>
 
-      {{#click-outside}}
-        <div class="inside">We're in</div>
-      {{/click-outside}}
-    `);
+        <ClickOutside>
+          <div class="inside">We're in</div>
+        </ClickOutside>
+      `);
 
       await click('.outside');
     });
@@ -114,27 +108,18 @@ module(
       });
 
       await render(hbs`
-      <div class="outside">Somewhere, over the rainbow...</div>
+        <div class="outside">Somewhere, over the rainbow...</div>
 
-      <div class="except-outside">
-        Somewhere, under the rainbow...
-      </div>
+        <div class="except-outside">
+          Somewhere, under the rainbow...
+        </div>
 
-      {{#click-outside exceptSelector=".except-outside" onClickOutside=(action this.didClickOutside)}}
-      {{/click-outside}}
-    `);
+        <ClickOutside @exceptSelector=".except-outside" @onClickOutside={{this.didClickOutside}}>
+        </ClickOutside>
+      `);
 
-      // It's important to fire the actions in the next run loop. Failing to do so
-      // would make the outside click not to fire. The reason for this is more
-      // often than not the component is rendered as a result of some user
-      // interaction, mainly a click. If the component attached the outside click
-      // event handler in the same loop, the handler would catch the event and send
-      // the action immediately.
-      await next(async () => {
-        await click('.outside');
-        await click('.except-outside');
-      });
-      await settled();
+      await click('.outside');
+      await click('.except-outside');
     });
 
     test('event type', async function (assert) {
@@ -149,20 +134,17 @@ module(
       });
 
       await render(hbs`
-      {{#if this.topSide}}
-        Blue
-      {{else}}
-        <div class="outside" {{action "toggleFlag"}}>Yellow</div>
-      {{/if}}
+        {{#if this.topSide}}
+          Blue
+        {{else}}
+          <div class="outside" {{action "toggleFlag"}}>Yellow</div>
+        {{/if}}
 
-      {{#click-outside eventType='mousedown' onClickOutside=(action this.didClickOutside)}}
-      {{/click-outside}}
-    `);
+        <ClickOutside @eventType="mousedown" @onClickOutside={{this.didClickOutside}}>
+        </ClickOutside>
+      `);
 
-      await next(async () => {
-        await triggerEvent('.outside', 'mousedown');
-      });
-      await settled();
+      await triggerEvent('.outside', 'mousedown');
     });
 
     test('handle removed DOM element outside', async function (assert) {
@@ -177,20 +159,16 @@ module(
       });
 
       await render(hbs`
-      {{#if this.topSide}}
-        Blue
-      {{else}}
-        <div class="outside" {{action "toggleFlag"}}>Yellow</div>
-      {{/if}}
+        {{#if this.topSide}}
+          Blue
+        {{else}}
+          <div class="outside" {{action "toggleFlag"}}>Yellow</div>
+        {{/if}}
 
-      {{#click-outside onClickOutside=(action this.didClickOutside)}}
-      {{/click-outside}}
-    `);
+        <ClickOutside @onClickOutside={{this.didClickOutside}}></ClickOutside>
+      `);
 
-      await next(async () => {
-        await click('.outside');
-      });
-      await settled();
+      await click('.outside');
     });
   }
 );
