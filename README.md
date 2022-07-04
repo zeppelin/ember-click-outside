@@ -23,7 +23,9 @@ ember install ember-click-outside
 </div>
 ```
 
-*If you're running ember-source <3.8, you need install [ember-modifier-manager-polyfill](https://github.com/rwjblue/ember-modifier-manager-polyfill) to get the modifier working.*
+*If you're running ember-source <3.22, you need to install [ember-destroyable-polyfill](https://github.com/ember-polyfills/ember-destroyable-polyfill) to get the modifier working.*
+
+*If you're running ember-source <3.8, you need to install [ember-modifier-manager-polyfill](https://github.com/rwjblue/ember-modifier-manager-polyfill) to get the modifier working.*
 
 
 If you wish to exclude certain elements from counting as outside clicks, use
