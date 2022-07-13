@@ -1,5 +1,14 @@
 
 
+
+## v5.0.1 (2022-07-13)
+
+#### :rocket: Enhancement
+* [#249](https://github.com/zeppelin/ember-click-outside/pull/249) Fix component deprecation message ([@zeppelin](https://github.com/zeppelin))
+
+#### Committers: 1
+- Gabor Babicz ([@zeppelin](https://github.com/zeppelin))
+
 ## v5.0.0 (2022-07-13)
 
 #### :boom: Breaking Change
