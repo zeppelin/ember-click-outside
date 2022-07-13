@@ -32,7 +32,7 @@ If you wish to exclude certain elements from counting as outside clicks, use
 the `exceptSelector` attribute:
 
 ```hbs
-<div {{click-outside onClickOutside=this.someAction exceptSelector=".some-selector"}}>
+<div {{on-click-outside onClickOutside=this.someAction exceptSelector=".some-selector"}}>
   Your HTML...
 </div>
 ```
@@ -40,7 +40,7 @@ the `exceptSelector` attribute:
 You can listen for events other than `click` by using the `eventType` attribute:
 
 ```hbs
-<div {{click-outside onClickOutside=this.someAction eventType="mousedown"}}>
+<div {{on-click-outside onClickOutside=this.someAction eventType="mousedown"}}>
   Your HTML...
 </div>
 ```
