@@ -25,7 +25,7 @@ module(
         getDeprecations().some(
           (d) =>
             d.message ===
-            'Using the <ClickOutside> component is deprecated and will be removed. Please consider migrating to the `{{click-outside}}` modifier'
+            'Using the <ClickOutside> component is deprecated and will be removed. Please consider migrating to the `{{on-click-outside}}` modifier'
         ),
         '<ClickOutside> component deprecation was raised'
       );
