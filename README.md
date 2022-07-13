@@ -6,9 +6,14 @@ A set of tools for detecting click events fired outside an element.
 
 ## Installation
 
-* Ember.js v3.20 or above
-* Ember CLI v3.20 or above
+* Ember.js v3.4 or above
+* Ember CLI v3.4 or above
 * Node.js v12 or above
+
+*If you're running ember-source <3.22, you need to install [ember-destroyable-polyfill](https://github.com/ember-polyfills/ember-destroyable-polyfill) to get the modifier working.*
+
+*If you're running ember-source <3.8, you need to install [ember-modifier-manager-polyfill](https://github.com/rwjblue/ember-modifier-manager-polyfill) to get the modifier working.*
+
 
 From within your ember-cli project directory install the addon:
 ```bash
@@ -22,11 +27,6 @@ ember install ember-click-outside
   Your HTML...
 </div>
 ```
-
-*If you're running ember-source <3.22, you need to install [ember-destroyable-polyfill](https://github.com/ember-polyfills/ember-destroyable-polyfill) to get the modifier working.*
-
-*If you're running ember-source <3.8, you need to install [ember-modifier-manager-polyfill](https://github.com/rwjblue/ember-modifier-manager-polyfill) to get the modifier working.*
-
 
 If you wish to exclude certain elements from counting as outside clicks, use
 the `exceptSelector` attribute:
