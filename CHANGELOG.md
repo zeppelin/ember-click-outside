@@ -1,4 +1,21 @@
 
+
+## v5.0.0 (2022-07-13)
+
+#### :boom: Breaking Change
+* [#242](https://github.com/zeppelin/ember-click-outside/pull/242) Drop ember-modifier < 3.2.0 & resolve deprecations ([@nickschot](https://github.com/nickschot))
+* [#244](https://github.com/zeppelin/ember-click-outside/pull/244) Remove deprecated ClickOutsideMixin ([@zeppelin](https://github.com/zeppelin))
+
+#### :rocket: Enhancement
+* [#248](https://github.com/zeppelin/ember-click-outside/pull/248) Add early Ember to test matrix ([@zeppelin](https://github.com/zeppelin))
+* [#246](https://github.com/zeppelin/ember-click-outside/pull/246) Prettify + replace ancient syntax in tests & dummy app ([@zeppelin](https://github.com/zeppelin))
+* [#245](https://github.com/zeppelin/ember-click-outside/pull/245) Deprecate ClickOutside component ([@zeppelin](https://github.com/zeppelin))
+* [#243](https://github.com/zeppelin/ember-click-outside/pull/243) Remove component template containing a single yield ([@zeppelin](https://github.com/zeppelin))
+
+#### Committers: 2
+- Gabor Babicz ([@zeppelin](https://github.com/zeppelin))
+- Nick Schot ([@nickschot](https://github.com/nickschot))
+
 ## v4.0.0 (2022-03-11)
 
 #### :boom: Breaking Change
