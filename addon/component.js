@@ -26,7 +26,7 @@ export default Component.extend({
     this._super(...args);
 
     deprecate(
-      'Using the <ClickOutside> component is deprecated and will be removed. Please consider migrating to the `{{click-outside}}` modifier',
+      'Using the <ClickOutside> component is deprecated and will be removed. Please consider migrating to the `{{on-click-outside}}` modifier',
       false,
       {
         id: 'ember-click-outside.component',
