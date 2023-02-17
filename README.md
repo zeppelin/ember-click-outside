@@ -1,6 +1,6 @@
 # ember-click-outside [![Build Status](https://travis-ci.org/zeppelin/ember-click-outside.svg)](https://travis-ci.org/zeppelin/ember-click-outside) [![Ember Observer Score](http://emberobserver.com/badges/ember-click-outside.svg)](http://emberobserver.com/addons/ember-click-outside)
 
-A set of tools for detecting click events fired outside an element.
+A handy modifier for detecting click events fired outside an element.
 
 ![click outside logo](click-outside-logo.png)
 
@@ -47,6 +47,6 @@ You can listen for events other than `click` by using the `eventType` attribute:
 
 ## Behavior
 
-For every click in the document, `ember-click-outside` will check if the click target is outside of its component, and trigger the provided action/callback if so.
+For every click in the document, `ember-click-outside` will check if the click target is outside of its element, and trigger the provided action/callback if so.
 
-If the click target cannot be found in the document (probably because it has been deleted before `ember-click-outside` detected the click), no action/callback is triggered, since we cannot check if it is inside or outside of the component.
+If the click target cannot be found in the document (probably because it has been deleted before `ember-click-outside` detected the click), no action/callback is triggered, since we cannot check if it is inside or outside of the element.
