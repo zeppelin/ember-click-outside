@@ -1,6 +1,16 @@
 
 
 
+
+## v6.0.0-beta.1 (2023-02-18)
+
+#### :boom: Breaking Change
+* [#259](https://github.com/zeppelin/ember-click-outside/pull/259) Convert to V2 addon format ([@zeppelin](https://github.com/zeppelin))
+* [#260](https://github.com/zeppelin/ember-click-outside/pull/260) Remove deprecated `<ClickOutside>` component ([@zeppelin](https://github.com/zeppelin))
+
+#### Committers: 1
+- Gabor Babicz ([@zeppelin](https://github.com/zeppelin))
+
 ## v5.0.1 (2022-07-13)
 
 #### :rocket: Enhancement

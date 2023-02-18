@@ -26,12 +26,12 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build package
-      - run: pnpm build
+        run: pnpm build
 
       - name: auto-dist-tag
         run: pnpx auto-dist-tag@1 --write ./ember-click-outside/package.json
 
       - name: pnpm publish
-        run: pnpm --filter ember-click-outside publish
+        run: pnpm --filter ember-click-outside publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
