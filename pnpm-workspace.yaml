@@ -1,0 +1,3 @@
+packages:
+  - 'ember-click-outside'
+  - 'test-app'
