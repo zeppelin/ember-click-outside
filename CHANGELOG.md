@@ -2,6 +2,15 @@
 
 
 
+
+## v6.0.1 (2023-03-02)
+
+#### :rocket: Enhancement
+* [#261](https://github.com/zeppelin/ember-click-outside/pull/261) Widen ember-modifier dependency range ([@zeppelin](https://github.com/zeppelin))
+
+#### Committers: 1
+- Gabor Babicz ([@zeppelin](https://github.com/zeppelin))
+
 ## v6.0.0 (2023-02-28)
 
 ## v6.0.0-beta.1 (2023-02-18)
