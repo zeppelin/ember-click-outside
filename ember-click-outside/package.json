@@ -10,7 +10,8 @@
   "author": "Gabor Babicz <gabor@gaborbabicz.com>",
   "files": [
     "addon-main.js",
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "build": "rollup --config",
@@ -63,7 +64,17 @@
   },
   "exports": {
     ".": "./dist/index.js",
-    "./*": "./dist/*.js",
+    "./*": {
+      "types": "./types/*.d.ts",
+      "default": "./dist/*.js"
+    },
     "./addon-main.js": "./addon-main.js"
+  },
+  "typesVersions": {
+    "*": {
+      "*": [
+        "types/*"
+      ]
+    }
   }
 }
