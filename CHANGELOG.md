@@ -3,6 +3,15 @@
 
 
 
+
+## v6.1.0 (2023-10-06)
+
+#### :rocket: Enhancement
+* [#264](https://github.com/zeppelin/ember-click-outside/pull/264) add typescript declarations (for Glint) ([@BoussonKarel](https://github.com/BoussonKarel))
+
+#### Committers: 1
+- [@BoussonKarel](https://github.com/BoussonKarel)
+
 ## v6.0.1 (2023-03-02)
 
 #### :rocket: Enhancement
