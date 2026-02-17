@@ -8,22 +8,19 @@ module('Integration | Modifier | on-click-outside GJS', function (hooks) {
 
   test('smoke test', async function (assert) {
     let didClickOutside = (e) => {
-      assert.ok('`didClickOutside` fired only once');
-      assert.strictEqual(
-        e.target.className,
-        'outside',
-        'the event object was passed and is correct'
-      );
-    });
+      assert.step(e.target.className);
+    };
 
     await render(
       <template>
         <div class="outside">Somewhere, over the rainbow...</div>
         <div {{ClickOutsideModifier didClickOutside}} class="inside">We're in</div>
-      </template>
+      </template>,
     );
 
     await click('.inside');
     await click('.outside');
+
+    assert.verifySteps(['outside']);
   });
 });

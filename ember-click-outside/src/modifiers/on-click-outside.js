@@ -62,7 +62,7 @@ export default class ClickOutsideModifier extends Modifier {
     this.eventHandler = this._createHandler(
       element,
       this.action,
-      this.exceptSelector
+      this.exceptSelector,
     );
     this.cancelOutsideListenerSetup = next(this, this._addClickOutsideListener);
   }

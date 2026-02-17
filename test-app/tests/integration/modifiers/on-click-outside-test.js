@@ -29,7 +29,7 @@ module('Integration | Modifier | on-click-outside', function (hooks) {
       assert.strictEqual(
         e.target.className,
         'outside',
-        'the event object was passed and is correct'
+        'the event object was passed and is correct',
       );
     });
 
