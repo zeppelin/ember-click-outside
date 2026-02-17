@@ -2,20 +2,14 @@
 
 module.exports = {
   root: true,
-  parser: 'babel-eslint',
+  parser: '@babel/eslint-parser',
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module',
-    ecmaFeatures: {
-      legacyDecorators: true,
-    },
+    requireConfigFile: false,
   },
   plugins: ['ember'],
-  extends: [
-    'eslint:recommended',
-    'plugin:ember/recommended',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:ember/recommended'],
   env: {
     browser: true,
   },
@@ -44,8 +38,20 @@ module.exports = {
       extends: ['plugin:n/recommended'],
     },
     {
+      files: ['*.gjs'],
+      parser: 'ember-eslint-parser',
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+      plugins: ['ember'],
+      rules: {
+        'ember/no-classic-components': 'error',
+      },
+    },
+    {
       // test files
-      files: ['tests/**/*-test.{js,ts}'],
+      files: ['tests/**/*-test.{js,ts,gjs}'],
       extends: ['plugin:qunit/recommended'],
     },
   ],

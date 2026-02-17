@@ -17,6 +17,8 @@ module.exports = async function () {
             'ember-on-modifier': '*',
             'ember-fn-helper-polyfill': '*',
             'ember-qunit': '^5.1.4',
+            '@ember/test-helpers': '^2.4.0',
+            'ember-template-imports': null,
           },
         },
       },
@@ -25,6 +27,8 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~3.28.0',
+            'ember-qunit': '^5.1.4',
+            '@ember/test-helpers': '^2.4.0',
           },
         },
       },
@@ -33,6 +37,8 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~3.28.0',
+            'ember-qunit': '^5.1.4',
+            '@ember/test-helpers': '^2.4.0',
           },
         },
       },
@@ -80,6 +86,8 @@ module.exports = async function () {
         npm: {
           devDependencies: {
             'ember-source': '~3.28.0',
+            'ember-qunit': '^5.1.4',
+            '@ember/test-helpers': '^2.4.0',
           },
           ember: {
             edition: 'classic',
